@@ -4,8 +4,8 @@ public class Kasserer extends Ansat{
 
 
 
-  public Kasserer(String brugerLogin) {
-    super(brugerLogin);
+  public Kasserer(String brugerLogin, String password) {
+    super(brugerLogin, password);
   }
 
 

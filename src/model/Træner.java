@@ -5,8 +5,8 @@ import java.util.ArrayList;
 public class Træner extends Ansat{
 
 
-  public Træner(String brugerNavn) {
-    super(brugerNavn);
+  public Træner(String brugerNavn, String password) {
+    super(brugerNavn, password);
   }
 
 
