@@ -1,6 +1,30 @@
 package view;
 
+import java.util.Scanner;
+
 public class UI {
+    private final Scanner stringInput = new Scanner(System.in);
+    private final Scanner intInput = new Scanner(System.in);
+
+
+
+
+
+        public int getIntInput() {
+            try{
+                return intInput.nextInt();
+            } catch (Exception e){
+                System.out.println("Invalid input");
+                intInput.nextLine();
+                return getIntInput();
+            }
+        }
+
+        public String getStringInput() {
+            return stringInput.nextLine();
+        }
+
+
     public void welcomeMessage() {
         // Startup velkomstbesked. Velkommen til Delfinprogrammet. Vil du logge ind eller lukke programmet ned?
     }
@@ -33,15 +57,19 @@ public class UI {
     public void trænerMenu() {
         // Menu til formand. Skal indeholde
         // 1) Vis medlemsliste
-        // 2) Opret medlem
-        // 3) Fjern medlem
-        // 4) Log ud
+        // 2) Vis top 5
+        // 3) Tilføj konkurrence information
+        // 3) Log ud
     }
 
     public void visSvømmeDiscipliner() {
         // 1) Brystsvømning
         // 2) Crawl... osv
         //Skal bruges i træner metoden.
+    }
+
+    public void indtastNoget(String noget) {
+        System.out.print("Indtast " + noget + ": ");
     }
 
 }

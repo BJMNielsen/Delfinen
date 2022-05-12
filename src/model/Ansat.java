@@ -8,9 +8,19 @@ public abstract class Ansat {
   private String password;
 
 
+
   public Ansat(String brugerLogin, String password) {
     this.brugerLogin = brugerLogin;
     this.password = password;
+  }
+
+
+  public static void setMedlemsListe(ArrayList<Medlem> medlemsListe) {
+    medlemsListen = medlemsListe;
+  }
+
+  public static ArrayList<Medlem> getMedlemsListen() {
+    return medlemsListen;
   }
 
   public void seMedlemsListe() {
