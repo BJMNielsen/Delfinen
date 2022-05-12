@@ -5,12 +5,12 @@ public class KonkurrenceSvømmer extends Medlem{
   private Svømmedisciplin butterfly, crawl, rygcrawl, brystsvømning;
 
 
-  public KonkurrenceSvømmer(MotionistSvømmer etMedlem) {
-    super(etMedlem.getNavn(), etMedlem.getFødselsdato(), etMedlem.getErAktiv());
+  public KonkurrenceSvømmer(Medlem etMedlem) {
+    super(etMedlem.getNavn(), etMedlem.getFødselsdato(), etMedlem.getErAktiv(), etMedlem.isiRestance());
     enTræner = null;
   }
-  public KonkurrenceSvømmer(MotionistSvømmer etMedlem, Træner enTræner) {
-    super(etMedlem.getNavn(), etMedlem.getFødselsdato(), etMedlem.getErAktiv());
+  public KonkurrenceSvømmer(Medlem etMedlem, Træner enTræner) {
+    super(etMedlem.getNavn(), etMedlem.getFødselsdato(), etMedlem.getErAktiv(), etMedlem.isiRestance());
     this.enTræner = enTræner;
   }
 }

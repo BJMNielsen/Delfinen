@@ -11,7 +11,7 @@ public class Svømmedisciplin {
   private LocalDate datoForBedsteTid;
 
 
-  public Svømmedisciplin(boolean erAktiv, Disciplin svømmedisciplin) {
+  public Svømmedisciplin(Disciplin svømmedisciplin, boolean erAktiv) {
     this.erAktiv = erAktiv;
     this.svømmedisciplin = svømmedisciplin;
   }

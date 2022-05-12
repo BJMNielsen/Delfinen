@@ -8,6 +8,11 @@ public class Kasserer extends Ansat{
     super(brugerLogin, password);
   }
 
+  public int visKontingent () {
+    // den her metode skal vise den forventede samlede kontingent indbetaling for alle medlemmer.
+    return 1;
+  }
+
 
   public String seRestanceMedlemmer() {
     return "";

@@ -12,4 +12,12 @@ public abstract class Ansat {
     this.brugerLogin = brugerLogin;
     this.password = password;
   }
+
+  public void seMedlemsListe() {
+
+  }
+
+  public void logout() {
+    // lav en logout metode der sender Formand, kasserer, eller træner tilbage til den første hovedmenu
+  }
 }
