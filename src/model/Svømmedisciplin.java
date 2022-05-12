@@ -1,5 +1,7 @@
 package model;
 
+import enums.Disciplin;
+
 import java.time.LocalDate;
 
 public class Svømmedisciplin {
