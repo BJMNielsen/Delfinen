@@ -25,6 +25,12 @@ public class Medlem {
     this.erAktiv = erAktiv;
   }
 
+  @Override
+  public String toString() {
+    return ID + ';' + navn + ';' + fødselsdato.getYear() + ';' + fødselsdato.getMonthValue() + ';'
+        + fødselsdato.getDayOfMonth() + ';' + erAktiv + ';' + konto;
+  }
+
   // Getters & Setters
 
   public String getID() {

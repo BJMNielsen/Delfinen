@@ -42,18 +42,18 @@ public class Formand extends Ansat{
 
 
 
-  public void indmeldKonkurrencesvømmer(Medlem etMedlem, String trænerLogin) {
-    KonkurrenceSvømmer enKonkurrencesvømmer = new KonkurrenceSvømmer(etMedlem, trænerLogin);
+  public void indmeldKonkurrencesvømmer(Medlem etMedlem, String trænerLogin, ArrayList<Svømmedisciplin> discipliner) {
+    KonkurrenceSvømmer enKonkurrencesvømmer = new KonkurrenceSvømmer(etMedlem, trænerLogin, discipliner);
     Ansat.addKonkurrencesvømmer(enKonkurrencesvømmer);
   }
 
-  public boolean upgradeMedlem(String ID, String trænerNavn) {
+  public boolean upgradeMedlem(String ID, String trænerNavn, ArrayList<Svømmedisciplin> discipliner) {
     ArrayList<Medlem> medlemsListe = Ansat.getMedlemsListen();
     for (Medlem etMedlem : medlemsListe) {
      String medlemID = etMedlem.getID();
      if (ID.equals(medlemID)) {
        Ansat.removeMember(etMedlem);
-       KonkurrenceSvømmer enKonkurrenceSvømmer = new KonkurrenceSvømmer(etMedlem, trænerNavn);
+       KonkurrenceSvømmer enKonkurrenceSvømmer = new KonkurrenceSvømmer(etMedlem, trænerNavn, discipliner);
        Ansat.addKonkurrencesvømmer(enKonkurrenceSvømmer);
        return true;
      }

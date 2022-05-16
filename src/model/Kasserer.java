@@ -1,5 +1,7 @@
 package model;
 
+import java.util.ArrayList;
+
 public class Kasserer extends Ansat{
 
 
@@ -8,8 +10,18 @@ public class Kasserer extends Ansat{
     super(brugerLogin, password);
   }
 
-  public int visKontingent () {
+  public double visKontingentForEtMedlem (Medlem etMedlem) {
+    if (etMedlem.getErAktiv()) {
+      // de betale noget ud efter deres alder
+    } else {
+      // de betaler 500 kroner om året
+    }
     // den her metode skal vise den forventede samlede kontingent indbetaling for alle medlemmer.
+    return 1;
+  }
+
+  public double visKontingentForAlleMedlemer() {
+    ArrayList<Medlem> medlemsListe = Ansat.getMedlemsListen();
     return 1;
   }
 

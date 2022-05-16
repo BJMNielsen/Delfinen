@@ -19,4 +19,11 @@ public class Svømmedisciplin {
     this.erAktiv = false;
     this.svømmedisciplin = svømmedisciplin;
   }
+
+  @Override
+  public String toString() {
+    return  "" + erAktiv + ';' + svømmedisciplin + ';' + bedsteTræningsTidISek + ';'
+        + datoForBedsteTid.getYear() + ';' + datoForBedsteTid.getMonthValue() + ';'
+        + datoForBedsteTid.getDayOfMonth();
+  }
 }
