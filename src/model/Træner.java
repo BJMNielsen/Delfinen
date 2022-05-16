@@ -9,6 +9,10 @@ public class Træner extends Ansat{
     super(brugerNavn, password);
   }
 
+  public Træner(String brugerLogin){
+    super (brugerLogin);
+  }
+
 
   public ArrayList<KonkurrenceSvømmer> skafKonkurrenceSvømmerer() {
     // kald medlemslisten og sorter den efter hvem der er aktiv som konkurrencesvømmere og læg dem derefter i konkurrenceSvømmere arraylisten.

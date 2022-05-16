@@ -7,9 +7,6 @@ public class UI {
     private final Scanner intInput = new Scanner(System.in);
 
 
-
-
-
         public int getIntInput() {
             try{
                 return intInput.nextInt();
@@ -26,7 +23,7 @@ public class UI {
 
 
     public void welcomeMessage() {
-        // Startup velkomstbesked. Velkommen til Delfinprogrammet. Vil du logge ind eller lukke programmet ned?
+        System.out.println("Velkommen til Delfinprogrammet. Vil du logge ind eller lukke programmet ned?");
     }
 
     public void login() {

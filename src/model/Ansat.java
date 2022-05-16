@@ -14,6 +14,22 @@ public abstract class Ansat {
     this.password = password;
   }
 
+  public Ansat (String brugerLogin){
+    this.brugerLogin = brugerLogin;
+    this.password = brugerLogin +1;
+  }
+
+  public static void addMedlem(Medlem medlem){
+    medlemsListen.add(medlem);
+  }
+
+  public static void removeMember(Medlem etMedlem) {
+    medlemsListen.remove(etMedlem);
+  }
+
+  public static void addKonkurrencesvømmer(KonkurrenceSvømmer konkurrenceSvømmer){
+    medlemsListen.add(konkurrenceSvømmer);
+  }
 
   public static void setMedlemsListe(ArrayList<Medlem> medlemsListe) {
     medlemsListen = medlemsListe;

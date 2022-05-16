@@ -4,7 +4,6 @@ import view.UI;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Formand extends Ansat{
 
@@ -12,34 +11,72 @@ public class Formand extends Ansat{
   public Formand() {
     super("Formand", "Password");
   }
+
   public Formand(String brugerNavn, String password) {
     super(brugerNavn, password);
   }
 
-  public void indmeldMedlem() {
-    Scanner input = new Scanner(System.in);
-    UI ui = new UI();
-    ui.indtastNoget("brugernavn");
-    String navn = input.nextLine();
-    ui.indtastNoget("fødselsdato");
-    LocalDate fødselsdato = LocalDate.parse(input.nextLine());
-    ui.indtastNoget("fødselsdato");
-    boolean erAktiv = input.nextBoolean();
-    boolean iRestance = input.nextBoolean();
-    Medlem etMedlem = new Medlem(navn, fødselsdato, erAktiv, iRestance);
+  public Medlem indmeldMedlem(String ID, String navn, LocalDate fødselsdato, boolean erAktiv, boolean erKonkurrencesvømmer) {
+    Medlem etMedlem = new Medlem(ID, navn, fødselsdato, erAktiv);
 
-    ArrayList<Medlem> medlemsListen = Ansat.getMedlemsListen();
-    medlemsListen.add(etMedlem);
-    Ansat.setMedlemsListe(medlemsListen);
-    // Først skal der laves et medlem (skal ikke ligges ind på medlemslisten)
-    // Derefter skal formanden spørges: SKal dette medlem også være konkurrencesvømmer? Hvis nej, så stopper metoden og de addes til medlemslisten.
-    // Hvis ja, så skal vi køre en metode der sender medlemmet over til opretKonkurrenceSvømmer metode eller hvad den kommer til at hedde.
+    if(erKonkurrencesvømmer){
+      return etMedlem;
+
+    } else {
+      Ansat.addMedlem(etMedlem);
+      return null;
+    }
+  }
+
+
+  public boolean erUnikID(String ID) {
+    ArrayList<Medlem> medlemsListe = Ansat.getMedlemsListen();
+    for (Medlem etMedlem : medlemsListe) {
+      String medlemID = etMedlem.getID();
+      if (ID.equals(medlemID)) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+
+
+  public void indmeldKonkurrencesvømmer(Medlem etMedlem, String trænerLogin) {
+    KonkurrenceSvømmer enKonkurrencesvømmer = new KonkurrenceSvømmer(etMedlem, trænerLogin);
+    Ansat.addKonkurrencesvømmer(enKonkurrencesvømmer);
+  }
+
+  public boolean upgradeMedlem(String ID, String trænerNavn) {
+    ArrayList<Medlem> medlemsListe = Ansat.getMedlemsListen();
+    for (Medlem etMedlem : medlemsListe) {
+     String medlemID = etMedlem.getID();
+     if (ID.equals(medlemID)) {
+       Ansat.removeMember(etMedlem);
+       KonkurrenceSvømmer enKonkurrenceSvømmer = new KonkurrenceSvømmer(etMedlem, trænerNavn);
+       Ansat.addKonkurrencesvømmer(enKonkurrenceSvømmer);
+       return true;
+     }
+    }
+    return false;
+  }
+
+  public boolean fjernMedlem(String ID) {
+    ArrayList<Medlem> medlemsListe = Ansat.getMedlemsListen();
+    for (Medlem etMedlem:medlemsListe) {
+      String medlemID = etMedlem.getID();
+      if (ID.equals(medlemID)) { // hvis ID der kom ind er lig med et Medlem ID og det var muligt at fjerne medlem
+        Ansat.removeMember(etMedlem);
+        return true;
+      }
+    }
+    return false; // Går igennem hele listen og ingen af dem var lig med ID der kom ind og det var ikke muligt at fjerne medlem
+  }
+
+  public void lavTræner(String navn){
 
   }
 
-  public void fjernMedlem() {
-
-  }
 
 }
 
