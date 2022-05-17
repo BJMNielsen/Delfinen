@@ -6,23 +6,22 @@ import java.time.LocalDate;
 
 public class Svømmedisciplin {
   private boolean erAktiv;
-  private Disciplin svømmedisciplin;
+  private Disciplin disciplin;
   private double bedsteTræningsTidISek;
   private LocalDate datoForBedsteTid;
 
 
-  public Svømmedisciplin(Disciplin svømmedisciplin, boolean erAktiv) {
+  public Svømmedisciplin(boolean erAktiv, Disciplin disciplin, double bedsteTræningsTidISek, LocalDate datoForBedsteTid) {
     this.erAktiv = erAktiv;
-    this.svømmedisciplin = svømmedisciplin;
+    this.disciplin = disciplin;
+    this.bedsteTræningsTidISek = bedsteTræningsTidISek;
+    this.datoForBedsteTid = datoForBedsteTid;
   }
-  public Svømmedisciplin(Disciplin svømmedisciplin){
-    this.erAktiv = false;
-    this.svømmedisciplin = svømmedisciplin;
-  }
+
 
   @Override
   public String toString() {
-    return  "" + erAktiv + ';' + svømmedisciplin + ';' + bedsteTræningsTidISek + ';'
+    return  "" + erAktiv + ';' + disciplin + ';' + bedsteTræningsTidISek + ';'
         + datoForBedsteTid.getYear() + ';' + datoForBedsteTid.getMonthValue() + ';'
         + datoForBedsteTid.getDayOfMonth();
   }

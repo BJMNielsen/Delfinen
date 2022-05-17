@@ -4,22 +4,22 @@ import java.time.LocalDate;
 
 // et medlem er en motionssvømmer
 public class Medlem {
-  private String ID;
+  private static int medlemsnummer; // lav om til at være autogenereret fra 1. OG INT
   private String navn;
   private LocalDate fødselsdato; // skal måske bare være en årstals Int som fx 1993. Ellers bliver det svært at regne?
   private boolean erAktiv;
   private double konto;
 
-  public Medlem(String ID, String navn, LocalDate fødselsdato, boolean erAktiv, double konto) {
-    this.ID = ID;
+  public Medlem(int medlemsnummer, String navn, LocalDate fødselsdato, boolean erAktiv, double konto) {
+    this.medlemsnummer = medlemsnummer;
     this.navn = navn;
     this.fødselsdato = fødselsdato;
     this.erAktiv = erAktiv;
     this.konto = konto;
 
   }
-  public Medlem(String ID, String navn, LocalDate fødselsdato, boolean erAktiv){
-    this.ID = ID;
+  public Medlem(int medlemsnummer, String navn, LocalDate fødselsdato, boolean erAktiv){
+    this.medlemsnummer = medlemsnummer;
     this.navn = navn;
     this.fødselsdato = fødselsdato;
     this.erAktiv = erAktiv;
@@ -27,14 +27,14 @@ public class Medlem {
 
   @Override
   public String toString() {
-    return ID + ';' + navn + ';' + fødselsdato.getYear() + ';' + fødselsdato.getMonthValue() + ';'
+    return medlemsnummer + ';' + navn + ';' + fødselsdato.getYear() + ';' + fødselsdato.getMonthValue() + ';'
         + fødselsdato.getDayOfMonth() + ';' + erAktiv + ';' + konto;
   }
 
   // Getters & Setters
 
-  public String getID() {
-    return ID;
+  public int getMedlemsnummer() {
+    return medlemsnummer;
   }
 
   public String getNavn() {

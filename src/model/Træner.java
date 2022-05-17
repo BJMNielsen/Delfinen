@@ -3,14 +3,19 @@ package model;
 import java.util.ArrayList;
 
 public class Træner extends Ansat{
+  private static int staticTrænerID;
+  private int trænerID;
 
 
   public Træner(String brugerNavn, String password) {
     super(brugerNavn, password);
+    staticTrænerID++;
+    trænerID=staticTrænerID;
   }
-
-  public Træner(String brugerLogin){
-    super (brugerLogin);
+//Dette er til når vi loader en træner ud fra en fil og laver ham
+  public Træner(String brugerNavn, String password,int trænerID) {
+    super(brugerNavn, password);
+    this.trænerID=trænerID;
   }
 
 
@@ -33,4 +38,15 @@ public class Træner extends Ansat{
   public void registrerKonkurrence() {
     // For de svømmere, der har deltaget i konkurrencer, registreres stævne, placering og tid.
   }
+
+  public static void setStaticTrænerID(int staticTrænerID) {
+    Træner.staticTrænerID = staticTrænerID;
+  }
+
+
+  @Override
+  public String toString() {
+    return getBrugerLogin() + ";" + getPassword() + ";" + trænerID;
+  }
+
 }

@@ -16,24 +16,24 @@ public class Formand extends Ansat{
     super(brugerNavn, password);
   }
 
-  public Medlem indmeldMedlem(String ID, String navn, LocalDate fødselsdato, boolean erAktiv, boolean erKonkurrencesvømmer) {
-    Medlem etMedlem = new Medlem(ID, navn, fødselsdato, erAktiv);
+  public Medlem indmeldMedlem(int medlemsnummer, String navn, LocalDate fødselsdato, boolean erAktiv, boolean erKonkurrencesvømmer) {
+    Medlem etMedlem = new Medlem(medlemsnummer, navn, fødselsdato, erAktiv);
 
     if(erKonkurrencesvømmer){
       return etMedlem;
 
     } else {
-      Ansat.addMedlem(etMedlem);
+      addMedlem(etMedlem);
       return null;
     }
   }
 
 
-  public boolean erUnikID(String ID) {
-    ArrayList<Medlem> medlemsListe = Ansat.getMedlemsListen();
+  public boolean erUnikID(int medlemsnummer) {
+    ArrayList<Medlem> medlemsListe = getMedlemsListen();
     for (Medlem etMedlem : medlemsListe) {
-      String medlemID = etMedlem.getID();
-      if (ID.equals(medlemID)) {
+      int aktuelleMedlemsnummer = etMedlem.getMedlemsnummer();
+      if (aktuelleMedlemsnummer == medlemsnummer) {
         return false;
       }
     }
@@ -42,31 +42,31 @@ public class Formand extends Ansat{
 
 
 
-  public void indmeldKonkurrencesvømmer(Medlem etMedlem, String trænerLogin, ArrayList<Svømmedisciplin> discipliner) {
-    KonkurrenceSvømmer enKonkurrencesvømmer = new KonkurrenceSvømmer(etMedlem, trænerLogin, discipliner);
-    Ansat.addKonkurrencesvømmer(enKonkurrencesvømmer);
+  public void indmeldKonkurrencesvømmer(Medlem etMedlem, int trænerID, ArrayList<Svømmedisciplin> discipliner) {
+    KonkurrenceSvømmer enKonkurrencesvømmer = new KonkurrenceSvømmer(etMedlem, trænerID, discipliner);
+    addKonkurrencesvømmer(enKonkurrencesvømmer);
   }
 
-  public boolean upgradeMedlem(String ID, String trænerNavn, ArrayList<Svømmedisciplin> discipliner) {
-    ArrayList<Medlem> medlemsListe = Ansat.getMedlemsListen();
+  public boolean upgradeTilKonkurrencesvømmer(int medlemsnummer, int trænerID, ArrayList<Svømmedisciplin> discipliner) {
+    ArrayList<Medlem> medlemsListe = getMedlemsListen();
     for (Medlem etMedlem : medlemsListe) {
-     String medlemID = etMedlem.getID();
-     if (ID.equals(medlemID)) {
-       Ansat.removeMember(etMedlem);
-       KonkurrenceSvømmer enKonkurrenceSvømmer = new KonkurrenceSvømmer(etMedlem, trænerNavn, discipliner);
-       Ansat.addKonkurrencesvømmer(enKonkurrenceSvømmer);
+     int aktuelleMedlemsnummer = etMedlem.getMedlemsnummer();
+     if (medlemsnummer == aktuelleMedlemsnummer) {
+       removeMember(etMedlem);
+       KonkurrenceSvømmer enKonkurrenceSvømmer = new KonkurrenceSvømmer(etMedlem, trænerID, discipliner);
+       addKonkurrencesvømmer(enKonkurrenceSvømmer);
        return true;
      }
     }
     return false;
   }
 
-  public boolean fjernMedlem(String ID) {
-    ArrayList<Medlem> medlemsListe = Ansat.getMedlemsListen();
+  public boolean fjernMedlem(int medlemsnummer) {
+    ArrayList<Medlem> medlemsListe = getMedlemsListen();
     for (Medlem etMedlem:medlemsListe) {
-      String medlemID = etMedlem.getID();
-      if (ID.equals(medlemID)) { // hvis ID der kom ind er lig med et Medlem ID og det var muligt at fjerne medlem
-        Ansat.removeMember(etMedlem);
+      int aktuelleMedlemsnummer = etMedlem.getMedlemsnummer();
+      if (medlemsnummer == aktuelleMedlemsnummer) { // hvis ID der kom ind er lig med et Medlem ID og det var muligt at fjerne medlem
+        removeMember(etMedlem);
         return true;
       }
     }
@@ -76,7 +76,6 @@ public class Formand extends Ansat{
   public void lavTræner(String navn){
 
   }
-
 
 }
 

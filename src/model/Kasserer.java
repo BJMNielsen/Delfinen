@@ -4,13 +4,11 @@ import java.util.ArrayList;
 
 public class Kasserer extends Ansat{
 
-
-
   public Kasserer(String brugerLogin, String password) {
     super(brugerLogin, password);
   }
 
-  public double visKontingentForEtMedlem (Medlem etMedlem) {
+  public double beregnKontingentForEtMedlem (Medlem etMedlem) {
     if (etMedlem.getErAktiv()) {
       // de betale noget ud efter deres alder
     } else {
@@ -20,9 +18,10 @@ public class Kasserer extends Ansat{
     return 1;
   }
 
-  public double visKontingentForAlleMedlemer() {
-    ArrayList<Medlem> medlemsListe = Ansat.getMedlemsListen();
-    return 1;
+  public double beregnKontingentForAlleMedlemmer() {
+    for (int i = 0; i < getMedlemsListen().size(); i++) {
+    }
+    return 1600;
   }
 
 

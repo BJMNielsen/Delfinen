@@ -19,6 +19,6 @@ public class SystemController {
 
     public void indtastLoginInfo() {
         ui.indtastNoget("brugernavn");
-        String brugerNavn = ui.userIput();
+       // String brugerNavn = ui.userIput();
     }
 }
