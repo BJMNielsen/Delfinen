@@ -20,8 +20,29 @@ public abstract class Ansat {
   }
 
   public void indsætTestData() {
-    Medlem m1 = new Medlem(1, "Børge", LocalDate.parse("1993-10-01"), true);
+    Medlem m1 = new Medlem(1,"Børge", LocalDate.parse("1993-10-01"), true,1600);
+    Medlem m2 = new Medlem(2,"Knud",LocalDate.parse("1990-03-10"),false,500);
+    Medlem m3 = new Medlem(3,"Louise",LocalDate.parse("2000-04-12"),true,1600);
+    Medlem m4 = new Medlem(4,"Hans",LocalDate.parse("2008-05-15"),true,1000);
+    Medlem m5 = new Medlem(5,"Line",LocalDate.parse("1999-07-03"),true,1600);
+    Medlem m6 = new Medlem(6,"Godzilla",LocalDate.parse("2010-09-04"),true,1000);
+    Medlem m7 = new Medlem(7,"Frederik",LocalDate.parse("1950-01-01"),true,1200);
+    Medlem m8 = new Medlem(8,"Lars",LocalDate.parse("1949-12-12"),false,500);
+    Medlem m9 = new Medlem(9,"Berit",LocalDate.parse("1960-10-04"),true,1200);
+    Medlem m10 = new Medlem(10,"Grete",LocalDate.parse("1992-04-10"),false,500);
+
     medlemsListen.add(m1);
+    medlemsListen.add(m2);
+    medlemsListen.add(m3);
+    medlemsListen.add(m4);
+    medlemsListen.add(m5);
+    medlemsListen.add(m6);
+    medlemsListen.add(m7);
+    medlemsListen.add(m8);
+    medlemsListen.add(m9);
+    medlemsListen.add(m10);
+
+    //Det fulde kontingent for alle medlemmer skulle meget gerne give = 10700
   }
 
   public void addMedlem(Medlem medlem){
@@ -36,18 +57,18 @@ public abstract class Ansat {
     medlemsListen.add(konkurrenceSvømmer);
   }
 
-  public void setMedlemsListe(ArrayList<Medlem> medlemsListe) {
-    medlemsListen = medlemsListe;
-  }
-
-
-
   public void logout() {
     // lav en logout metode der sender Formand, kasserer, eller træner tilbage til den første hovedmenu
   }
+
+
+
 // getters og setters
   public String getBrugerLogin() {
     return brugerLogin;
+  }
+  public void setMedlemsListe(ArrayList<Medlem> medlemsListe) {
+    medlemsListen = medlemsListe;
   }
 
   public String getPassword() {

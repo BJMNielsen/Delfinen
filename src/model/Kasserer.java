@@ -1,8 +1,7 @@
 package model;
 
-import java.util.ArrayList;
-
 public class Kasserer extends Ansat{
+  double result;
 
   public Kasserer(String brugerLogin, String password) {
     super(brugerLogin, password);
@@ -20,8 +19,9 @@ public class Kasserer extends Ansat{
 
   public double beregnKontingentForAlleMedlemmer() {
     for (int i = 0; i < getMedlemsListen().size(); i++) {
+      result = result + getMedlemsListen().get(i).getKonto();
     }
-    return 1600;
+    return result;
   }
 
 
