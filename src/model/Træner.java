@@ -3,6 +3,7 @@ package model;
 import java.util.ArrayList;
 
 public class Træner extends Ansat{
+
   private static int staticTrænerID;
   private int trænerID;
 
@@ -43,6 +44,10 @@ public class Træner extends Ansat{
     Træner.staticTrænerID = staticTrænerID;
   }
 
+
+  public static int getStaticTrænerID() {
+    return staticTrænerID;
+  }
 
   @Override
   public String toString() {

@@ -15,13 +15,16 @@ public class Filhåndtering {
     File medlemslisteFil;
     File ansatlisteFil;
 
-    Filhåndtering() {
+    public Filhåndtering() {
         medlemslisteFil = new File("medlemslisteFil.csv");
         ansatlisteFil = new File("ansatlisteFil.csv");
     }
 
     public void saveMedlemsliste(ArrayList<Medlem> medlemsliste) throws FileNotFoundException {
         PrintStream saveFile = new PrintStream(medlemslisteFil);
+        if (medlemsliste.size() > 0) {
+            saveFile.println(Medlem.getStaticMedlemsnummer());
+        }
         for (int i = 0; i < medlemsliste.size(); i++) {
             saveFile.println(medlemsliste.get(i));
         }
@@ -44,12 +47,11 @@ public class Filhåndtering {
     }
 
     public Medlem createMedlem(Scanner input2) {
-        int medlemsnummer = input2.nextInt();
         String name = input2.next();
         LocalDate birthdate = createDate(input2);
         boolean erAktiv = input2.nextBoolean();
         double konto = input2.nextDouble();
-        return new Medlem(medlemsnummer, name, birthdate, erAktiv, konto);
+        return new Medlem(name, birthdate, erAktiv, konto);
     }
 
     public Formand createFormand(Scanner input2){
@@ -91,14 +93,21 @@ public class Filhåndtering {
         boolean erAktiv = input2.nextBoolean();
         Disciplin disciplin = Disciplin.valueOf(input2.next());
         double bedsteTræningstidISekunder = input2.nextDouble();
+        if (bedsteTræningstidISekunder <= 0) {
+            return new Svømmedisciplin(erAktiv, disciplin);
+        }
         LocalDate datoForBedsteTid = createDate(input2);
         return new Svømmedisciplin(erAktiv, disciplin, bedsteTræningstidISekunder,datoForBedsteTid);
     }
 
     public void saveAnsatLoginListe(ArrayList<Ansat> ansatListe) throws FileNotFoundException{
         PrintStream saveFile = new PrintStream(ansatlisteFil);
-        for (int i = 0; i < ansatListe.size(); i++) {
-            saveFile.println(ansatListe.get(i));
+        int num = 0;
+        for (Ansat enAnsat: ansatListe) {
+            if(enAnsat instanceof Træner && num < 1) {
+                saveFile.println(Træner.getStaticTrænerID());
+                num++;
+            } saveFile.println(enAnsat);
         }
     }
 

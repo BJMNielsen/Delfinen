@@ -18,11 +18,23 @@ public class Svømmedisciplin {
     this.datoForBedsteTid = datoForBedsteTid;
   }
 
+  public Svømmedisciplin(boolean erAktiv, Disciplin disciplin) {
+    this.erAktiv = erAktiv;
+    this.disciplin = disciplin;
+    bedsteTræningsTidISek = 0;
+    datoForBedsteTid = null;
+  }
+
 
   @Override
   public String toString() {
-    return  "" + erAktiv + ';' + disciplin + ';' + bedsteTræningsTidISek + ';'
+    String bedsteTidDato;
+    if(datoForBedsteTid == null)
+      return "" + erAktiv + ';' + disciplin + ';' + bedsteTræningsTidISek + ';' + null;
+    else
+    return "" + erAktiv + ';' + disciplin + ';' + bedsteTræningsTidISek + ';'
         + datoForBedsteTid.getYear() + ';' + datoForBedsteTid.getMonthValue() + ';'
         + datoForBedsteTid.getDayOfMonth();
+
   }
 }

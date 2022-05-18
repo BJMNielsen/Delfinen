@@ -16,8 +16,8 @@ public class Formand extends Ansat{
     super(brugerNavn, password);
   }
 
-  public Medlem indmeldMedlem(int medlemsnummer, String navn, LocalDate fødselsdato, boolean erAktiv, boolean erKonkurrencesvømmer) {
-    Medlem etMedlem = new Medlem(medlemsnummer, navn, fødselsdato, erAktiv);
+  public Medlem indmeldMedlem(String navn, LocalDate fødselsdato, boolean erAktiv, boolean erKonkurrencesvømmer, int kontingentBalance) {
+    Medlem etMedlem = new Medlem(navn, fødselsdato, erAktiv, kontingentBalance);
 
     if(erKonkurrencesvømmer){
       return etMedlem;

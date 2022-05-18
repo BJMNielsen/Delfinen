@@ -9,7 +9,7 @@ public class KonkurrenceSvømmer extends Medlem{
 
 
   public KonkurrenceSvømmer(Medlem etMedlem, int trænerID, ArrayList<Svømmedisciplin> discipliner) {
-    super(etMedlem.getMedlemsnummer(), etMedlem.getNavn(), etMedlem.getFødselsdato(), etMedlem.getErAktiv(), etMedlem.getKonto());
+    super(etMedlem.getNavn(), etMedlem.getFødselsdato(), etMedlem.getErAktiv(), etMedlem.getKontingentBalance(), etMedlem.getMedlemsnummer());
     this.trænerID = trænerID;
     butterfly = discipliner.get(0);
     crawl = discipliner.get(1);
@@ -19,9 +19,9 @@ public class KonkurrenceSvømmer extends Medlem{
 
   @Override
   public String toString() {
-    return getMedlemsnummer() + ';' + getNavn() + ';' + getFødselsdato().getYear() + ';' +
+    return "" + getMedlemsnummer() + ';' + getNavn() + ';' + getFødselsdato().getYear() + ';' +
         getFødselsdato().getMonthValue() + ';' + getFødselsdato().getDayOfMonth() + ';' +
-        getErAktiv() + ';' + getKonto() + ';' + trænerID + ';' + butterfly + ';' + crawl + ';'
+        getErAktiv() + ';' + getKontingentBalance() + ';' + trænerID + ';' + butterfly + ';' + crawl + ';'
         + rygcrawl + ';' + brystsvømning;
   }
 }

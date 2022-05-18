@@ -19,7 +19,7 @@ public class Kasserer extends Ansat{
 
   public double beregnKontingentForAlleMedlemmer() {
     for (int i = 0; i < getMedlemsListen().size(); i++) {
-      result = result + getMedlemsListen().get(i).getKonto();
+      result = result + getMedlemsListen().get(i).getKontingentBalance();
     }
     return result;
   }
