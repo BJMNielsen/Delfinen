@@ -1,31 +1,48 @@
 package model;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
+
 public class Kasserer extends Ansat{
   double result;
+  double kontingent;
+  ArrayList<Medlem> medlemsListen = new ArrayList<>();
+
 
   public Kasserer(String brugerLogin, String password) {
     super(brugerLogin, password);
   }
 
   public double beregnKontingentForEtMedlem (Medlem etMedlem) {
+
     if (etMedlem.getErAktiv()) {
-      // de betale noget ud efter deres alder
+      if(java.time.LocalDate.now().getYear() - etMedlem.getFødselsdato().getYear() < 18){
+        kontingent = 1000;
+      }
+      else if(java.time.LocalDate.now().getYear() - etMedlem.getFødselsdato().getYear() > 18 && java.time.LocalDate.now().getYear()  - etMedlem.getFødselsdato().getYear() < 60){
+        kontingent = 1600;
+      } else {
+        kontingent = 1200;
+      }
+
     } else {
-      // de betaler 500 kroner om året
+        kontingent = 500;
     }
-    // den her metode skal vise den forventede samlede kontingent indbetaling for alle medlemmer.
-    return 1;
+    return kontingent;
   }
 
   public double beregnKontingentForAlleMedlemmer() {
-    for (int i = 0; i < getMedlemsListen().size(); i++) {
-      result = result + getMedlemsListen().get(i).getKontingentBalance();
+    for (int i = 0; i < medlemsListen.size(); i++) {
+      result = result + medlemsListen.get(i).getKontingentBalance();
     }
     return result;
   }
 
-
-  public String seRestanceMedlemmer() {
-    return "";
+  public void seRestanceMedlemmer() {
+    for (int i = 0; i < medlemsListen.size(); i++) {
+      if(medlemsListen.get(i).getKontingentBalance() < 0){
+        System.out.println(medlemsListen.get(i));
+      }
+    }
   }
 }
