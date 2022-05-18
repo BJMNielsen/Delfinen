@@ -21,19 +21,32 @@ public class Træner extends Ansat{
 
 
   public ArrayList<KonkurrenceSvømmer> skafKonkurrenceSvømmerer() {
-    // kald medlemslisten og sorter den efter hvem der er aktiv som konkurrencesvømmere og læg dem derefter i konkurrenceSvømmere arraylisten.
     ArrayList<KonkurrenceSvømmer> konkurrenceSvømmerer = new ArrayList<>();
+    for (int i = 0; i < getMedlemsListen().size(); i++){
+      if (getMedlemsListen().get(i) instanceof KonkurrenceSvømmer){
+        konkurrenceSvømmerer.add((KonkurrenceSvømmer) getMedlemsListen().get(i));
+      }
+    }
     return konkurrenceSvømmerer;
   }
 
-  public void visTop5Svømmerer() {
-    // Træneren ønsker derfor en oversigt,
-    // der kan vise klubbens top 5 svømmere inden for hver svømmedisciplin
-    // (butterfly, crawl, rygcrawl og brystsvømning), fordelt på henholdsvis junior og seniorsvømmere.
-    // Vi skal lave en metode der spørger træneren først: Hvilken svømmedisciplin vil du se top 5 over?
-      // 1) Brystsvømning
-      // 2) Crawl... osv osv
-    // Så vælger han en svømmedisciplin og så vises der en top over både Junior or seniorsvømmere.
+  public ArrayList<KonkurrenceSvømmer> skafJuniorHold (ArrayList<KonkurrenceSvømmer> konkurrenceSvømmere) {
+    ArrayList<KonkurrenceSvømmer> juniorKonkurrenceSvømmere = new ArrayList<>();
+    for (int i = 0; i < konkurrenceSvømmere.size(); i++) {
+      if (java.time.LocalDate.now().getYear() - konkurrenceSvømmere.get(i).getFødselsdato().getYear() < 18) {
+        juniorKonkurrenceSvømmere.add(konkurrenceSvømmere.get(i));
+      }
+    }
+    return juniorKonkurrenceSvømmere;
+  }
+  public ArrayList<KonkurrenceSvømmer> skafSeniorHold (ArrayList<KonkurrenceSvømmer> konkurrenceSvømmers) {
+    ArrayList<KonkurrenceSvømmer> seniorKonkurrenceSvømmere = new ArrayList<>();
+    for (int i = 0; i < konkurrenceSvømmers.size(); i++) {
+      if(java.time.LocalDate.now().getYear() - konkurrenceSvømmers.get(i).getFødselsdato().getYear() > 18 && java.time.LocalDate.now().getYear()  - konkurrenceSvømmers.get(i).getFødselsdato().getYear() < 60){
+        seniorKonkurrenceSvømmere.add(konkurrenceSvømmers.get(i));
+      }
+    }
+    return seniorKonkurrenceSvømmere;
   }
 
   public void registrerKonkurrence() {
@@ -53,5 +66,6 @@ public class Træner extends Ansat{
   public String toString() {
     return getBrugerLogin() + ";" + getPassword() + ";" + trænerID;
   }
+
 
 }
