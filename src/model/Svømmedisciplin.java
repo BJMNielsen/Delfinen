@@ -30,7 +30,7 @@ public class Svømmedisciplin {
   public String toString() {
     String bedsteTidDato;
     if(datoForBedsteTid == null)
-      return "" + erAktiv + ';' + disciplin + ';' + bedsteTræningsTidISek + ';' + null;
+      return "" + erAktiv + ';' + disciplin + ';' + bedsteTræningsTidISek;
     else
     return "" + erAktiv + ';' + disciplin + ';' + bedsteTræningsTidISek + ';'
         + datoForBedsteTid.getYear() + ';' + datoForBedsteTid.getMonthValue() + ';'

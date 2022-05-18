@@ -11,12 +11,17 @@ public class Træner extends Ansat{
   public Træner(String brugerNavn, String password) {
     super(brugerNavn, password);
     staticTrænerID++;
-    trænerID=staticTrænerID;
+    trænerID = staticTrænerID;
   }
 //Dette er til når vi loader en træner ud fra en fil og laver ham
   public Træner(String brugerNavn, String password,int trænerID) {
     super(brugerNavn, password);
     this.trænerID=trænerID;
+  }
+  public Træner(){
+    super.setBrugerLogin("Træner" + trænerID);
+    staticTrænerID++;
+    trænerID = staticTrænerID;
   }
 
 

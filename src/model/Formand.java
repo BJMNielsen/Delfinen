@@ -9,7 +9,7 @@ public class Formand extends Ansat{
 
 
   public Formand() {
-    super("Formand", "Password");
+    super.setBrugerLogin("Formand");
   }
 
   public Formand(String brugerNavn, String password) {

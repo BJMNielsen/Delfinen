@@ -19,6 +19,10 @@ public abstract class Ansat {
     this.password = brugerLogin + 1;
   }
 
+  public Ansat(){
+    this.password = "Password";
+  }
+
   public void indsætTestData() {
     Medlem m1 = new Medlem("Børge", LocalDate.parse("1993-10-01"), true, 1600);
     Medlem m2 = new Medlem("Knud", LocalDate.parse("1990-03-10"), false, 500);
@@ -66,6 +70,9 @@ public abstract class Ansat {
   public String getBrugerLogin() {
     return brugerLogin;
   }
+  public void setBrugerLogin(String brugerLogin) {
+    this.brugerLogin = brugerLogin;
+  }
 
   public void setMedlemsListe(ArrayList<Medlem> medlemsListe) {
     medlemsListen = medlemsListe;
@@ -73,6 +80,10 @@ public abstract class Ansat {
 
   public String getPassword() {
     return password;
+  }
+
+  public void setPassword(String password) {
+    this.password = password;
   }
 
   public ArrayList<Medlem> getMedlemsListen() {

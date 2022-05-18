@@ -19,11 +19,23 @@ public class Main {
         ArrayList<Medlem> medlemsliste = ArraylistMedlemmer();
         f1.saveMedlemsliste(medlemsliste);
 
-        ArrayList<Ansat> ansatListe = ArraylistAnsatte();
-        f1.saveAnsatLoginListe(ansatListe);
-
         ArrayList<Medlem> loadedMedlemsliste = f1.loadMedlemsliste();
+        System.out.println(loadedMedlemsliste.get(0));
+        System.out.println(loadedMedlemsliste.get(1));
+        System.out.println(loadedMedlemsliste.get(2));
+        System.out.println(loadedMedlemsliste.get(3));
 
+      System.out.println();
+
+      ArrayList<Ansat> ansatListe = ArraylistAnsatte();
+      //ArrayList<Ansat> ansatListe = new ArrayList<>();
+      f1.saveAnsatLoginListe(ansatListe);
+
+      ArrayList<Ansat> loadedAnsatListe = f1.loadAnsatLoginListe();
+      System.out.println(loadedAnsatListe.get(0));
+      System.out.println(loadedAnsatListe.get(1));
+      System.out.println(loadedAnsatListe.get(2));
+      f1.saveAnsatLoginListe(loadedAnsatListe);
     }
      public ArrayList<Medlem> ArraylistMedlemmer() {
         ArrayList<Medlem> medlemsliste = new ArrayList<>();

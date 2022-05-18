@@ -33,14 +33,16 @@ public class Filhåndtering {
     public ArrayList<Medlem> loadMedlemsliste() throws FileNotFoundException{
         ArrayList<Medlem> medlemsliste = new ArrayList<>();
         Scanner input = new Scanner(medlemslisteFil);
-        int num = 0;
+        boolean isFirstLine = true;
         while(input.hasNextLine()) {
-            Scanner input2 = scanIn(input);
-            if (num <= 0) {
-                int staticmedlemsNummer = input2.nextInt();
+            if (isFirstLine) {
+                Scanner firstLine = scanIn(input.nextLine());
+                int staticmedlemsNummer = firstLine.nextInt();
                 Medlem.setStaticMedlemsnummer(staticmedlemsNummer);
-                num++;
+                isFirstLine = false;
             }
+            String nextLine = input.nextLine();
+            Scanner input2 = scanIn(nextLine);
             Medlem etMedlem = createMedlem(input2);
             if(input2.hasNext()) {
                 KonkurrenceSvømmer enKonkurrenceSvømmer = createKonkurrenceSvømmer(input2, etMedlem);
@@ -54,14 +56,12 @@ public class Filhåndtering {
     }
 
     public Medlem createMedlem(Scanner input2) {
-        String name = input2.nextLine
-
-                ();
+        String name = input2.next();
         LocalDate birthdate = createDate(input2);
         boolean erAktiv = input2.nextBoolean();
-        double konto = input2.nextDouble();
+        double kontingentBalance = input2.nextDouble();
         int medlemsnummer = input2.nextInt();
-        return new Medlem(name, birthdate, erAktiv, konto, medlemsnummer);
+        return new Medlem(name, birthdate, erAktiv, kontingentBalance, medlemsnummer);
     }
 
     public Formand createFormand(Scanner input2){
@@ -82,10 +82,10 @@ public class Filhåndtering {
     }
 
     public LocalDate createDate(Scanner input2) {
-        int birthYear = input2.nextInt();
-        int birthMonth = input2.nextInt();
-        int birthDay = input2.nextInt();
-        return LocalDate.of(birthYear, birthMonth, birthDay);
+        int year = input2.nextInt();
+        int month = input2.nextInt();
+        int day = input2.nextInt();
+        return LocalDate.of(year, month, day);
     }
 
     public KonkurrenceSvømmer createKonkurrenceSvømmer(Scanner input2, Medlem medlem) {
@@ -112,11 +112,11 @@ public class Filhåndtering {
 
     public void saveAnsatLoginListe(ArrayList<Ansat> ansatListe) throws FileNotFoundException{
         PrintStream saveFile = new PrintStream(ansatlisteFil);
-        int num = 0;
+        boolean erDenFørsteInstanceAfEnTræner = true;
         for (Ansat enAnsat: ansatListe) {
-            if(enAnsat instanceof Træner && num < 1) {
+            if(enAnsat instanceof Træner && erDenFørsteInstanceAfEnTræner) {
                 saveFile.println(Træner.getStaticTrænerID());
-                num++;
+                erDenFørsteInstanceAfEnTræner = false;
             } saveFile.println(enAnsat);
         }
     }
@@ -125,31 +125,44 @@ public class Filhåndtering {
         ArrayList<Ansat> ansatListe = new ArrayList<>();
         Scanner input = new Scanner(ansatlisteFil);
         if (input.hasNextLine()) {
-            Scanner input2 = scanIn(input);
+            String nextLine = input.nextLine();
+            Scanner input2 = scanIn(nextLine);
             Formand enFormand = createFormand(input2);
             ansatListe.add(enFormand);
-            input2 = scanIn(input);
+            nextLine = input.nextLine();
+            input2 = scanIn(nextLine);
             Kasserer enKassere = createKassere(input2);
             ansatListe.add(enKassere);
 
             if (input.hasNextLine()) {
-                input2 = scanIn(input);
+                nextLine = input.nextLine();
+                input2 = scanIn(nextLine);
                 int staticTrænerID = input2.nextInt();
                 Træner.setStaticTrænerID(staticTrænerID);
 
                 while(input.hasNextLine()) {
-                    input2 = scanIn(input);
+                    nextLine = input.nextLine();
+                    input2 = scanIn(nextLine);
                     Træner enTræner = createTræner(input2);
                     ansatListe.add(enTræner);
                 }
             }
+        } else {
+            ansatListe = createDefaultAnsatListe();
         }
         return ansatListe;
     }
 
+    public ArrayList<Ansat> createDefaultAnsatListe() {
+        ArrayList<Ansat> defaultAnsatListe = new ArrayList<>();
+        defaultAnsatListe.add(new Formand());
+        defaultAnsatListe.add(new Kasserer());
+        defaultAnsatListe.add(new Træner());
+        return defaultAnsatListe;
+    }
 
-    public Scanner scanIn(Scanner input) {
-        String nextLine = input.nextLine();
+
+    public Scanner scanIn(String nextLine) {
         return new Scanner(nextLine).useDelimiter(";").useLocale(Locale.ENGLISH);
     }
 

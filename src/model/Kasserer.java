@@ -13,6 +13,10 @@ public class Kasserer extends Ansat{
     super(brugerLogin, password);
   }
 
+  public Kasserer(){
+    super.setBrugerLogin("Kasserer");
+  }
+
   public double beregnKontingentForEtMedlem (Medlem etMedlem) {
 
     if (etMedlem.getErAktiv()) {

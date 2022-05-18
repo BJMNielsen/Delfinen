@@ -35,9 +35,9 @@ public class KonkurrenceSvømmer extends Medlem implements Comparable{
 
   @Override
   public String toString() {
-    return "" + getMedlemsnummer() + ';' + getNavn() + ';' + getFødselsdato().getYear() + ';' +
+    return getNavn() + ';' + getFødselsdato().getYear() + ';' +
         getFødselsdato().getMonthValue() + ';' + getFødselsdato().getDayOfMonth() + ';' +
-        getErAktiv() + ';' + getKontingentBalance() + ';' + trænerID + ';' + butterfly + ';' + crawl + ';'
+        getErAktiv() + ';' + getKontingentBalance() + ';' + getMedlemsnummer() + ';' + trænerID + ';' + butterfly + ';' + crawl + ';'
         + rygcrawl + ';' + brystsvømning;
   }
 
