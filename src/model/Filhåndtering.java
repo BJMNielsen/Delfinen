@@ -33,9 +33,14 @@ public class Filhåndtering {
     public ArrayList<Medlem> loadMedlemsliste() throws FileNotFoundException{
         ArrayList<Medlem> medlemsliste = new ArrayList<>();
         Scanner input = new Scanner(medlemslisteFil);
+        int num = 0;
         while(input.hasNextLine()) {
-            String medlemsinfo = input.nextLine();
-            Scanner input2 = new Scanner(medlemsinfo).useDelimiter(";").useLocale(Locale.ENGLISH);
+            Scanner input2 = scanIn(input);
+            if (num <= 0) {
+                int staticmedlemsNummer = input2.nextInt();
+                Medlem.setStaticMedlemsnummer(staticmedlemsNummer);
+                num++;
+            }
             Medlem etMedlem = createMedlem(input2);
             if(input2.hasNext()) {
                 KonkurrenceSvømmer enKonkurrenceSvømmer = createKonkurrenceSvømmer(input2, etMedlem);
@@ -43,15 +48,20 @@ public class Filhåndtering {
             } else {
                 medlemsliste.add(etMedlem);
             }
-        } return medlemsliste;
+        }
+
+         return medlemsliste;
     }
 
     public Medlem createMedlem(Scanner input2) {
-        String name = input2.next();
+        String name = input2.nextLine
+
+                ();
         LocalDate birthdate = createDate(input2);
         boolean erAktiv = input2.nextBoolean();
         double konto = input2.nextDouble();
-        return new Medlem(name, birthdate, erAktiv, konto);
+        int medlemsnummer = input2.nextInt();
+        return new Medlem(name, birthdate, erAktiv, konto, medlemsnummer);
     }
 
     public Formand createFormand(Scanner input2){

@@ -21,6 +21,9 @@ public class Main {
 
         ArrayList<Ansat> ansatListe = ArraylistAnsatte();
         f1.saveAnsatLoginListe(ansatListe);
+
+        ArrayList<Medlem> loadedMedlemsliste = f1.loadMedlemsliste();
+
     }
      public ArrayList<Medlem> ArraylistMedlemmer() {
         ArrayList<Medlem> medlemsliste = new ArrayList<>();

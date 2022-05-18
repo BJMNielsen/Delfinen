@@ -31,8 +31,8 @@ public class Medlem {
 
   @Override
   public String toString() {
-    return "" + medlemsnummer + ';' + navn + ';' + fødselsdato.getYear() + ';' + fødselsdato.getMonthValue() + ';'
-        + fødselsdato.getDayOfMonth() + ';' + erAktiv + ';' + kontingentBalance;
+    return navn + ';' + fødselsdato.getYear() + ';' + fødselsdato.getMonthValue() + ';'
+        + fødselsdato.getDayOfMonth() + ';' + erAktiv + ';' + kontingentBalance + ';' + medlemsnummer;
   }
 
   // Getters & Setters
