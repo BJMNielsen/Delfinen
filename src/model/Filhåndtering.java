@@ -112,6 +112,9 @@ public class Filhåndtering {
 
     public void saveAnsatLoginListe(ArrayList<Ansat> ansatListe) throws FileNotFoundException{
         PrintStream saveFile = new PrintStream(ansatlisteFil);
+        if (ansatListe.size() < 1) {
+            ansatListe = createDefaultAnsatListe();
+        }
         boolean erDenFørsteInstanceAfEnTræner = true;
         for (Ansat enAnsat: ansatListe) {
             if(enAnsat instanceof Træner && erDenFørsteInstanceAfEnTræner) {
