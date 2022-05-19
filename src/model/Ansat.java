@@ -11,7 +11,7 @@ public abstract class Ansat {
   public Ansat(String brugerLogin, String password) {
     this.brugerLogin = brugerLogin;
     this.password = password;
-    medlemsListen = new ArrayList<>();
+
   }
 
   public Ansat(String brugerLogin) {

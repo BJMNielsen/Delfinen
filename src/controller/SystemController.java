@@ -1,12 +1,24 @@
 package controller;
 
+import model.Ansat;
+import model.Filhåndtering;
 import view.UI;
+
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
 
 public class SystemController {
     private UI ui;
+    private Filhåndtering filhåndtering;
+    private ArrayList<Ansat> ansatListe;
 
-    public SystemController() {
+    public SystemController() throws FileNotFoundException {
         ui = new UI();
+        filhåndtering = new Filhåndtering();
+        ansatListe = filhåndtering.loadAnsatLoginListe();
+
+
+
     }
 
 

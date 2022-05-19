@@ -7,7 +7,6 @@ import java.io.FileNotFoundException;
 import java.io.PrintStream;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Locale;
 import java.util.Scanner;
 
@@ -90,13 +89,8 @@ public class Filhåndtering {
 
     public KonkurrenceSvømmer createKonkurrenceSvømmer(Scanner input2, Medlem medlem) {
         int trænerID = input2.nextInt();
-        Svømmedisciplin butterfly = createSvømmedisciplin(input2);
-        Svømmedisciplin crawl = createSvømmedisciplin(input2);
-        Svømmedisciplin rygcrawl = createSvømmedisciplin(input2);
-        Svømmedisciplin brystsvømning = createSvømmedisciplin(input2);
-        ArrayList<Svømmedisciplin> listeAfSvømmediscipliner = new ArrayList<>();
-        listeAfSvømmediscipliner.addAll(Arrays.asList(butterfly,crawl,rygcrawl,brystsvømning));
-        return new KonkurrenceSvømmer(medlem, trænerID, listeAfSvømmediscipliner);
+        Svømmedisciplin svømmedisciplin = createSvømmedisciplin(input2);
+        return new KonkurrenceSvømmer(medlem, trænerID, svømmedisciplin);
     }
 
     public Svømmedisciplin createSvømmedisciplin(Scanner input2) {

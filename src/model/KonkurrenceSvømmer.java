@@ -1,48 +1,31 @@
 package model;
 
-import java.util.ArrayList;
 
-public class KonkurrenceSvømmer extends Medlem implements Comparable{
+public class KonkurrenceSvømmer extends Medlem implements Comparable<KonkurrenceSvømmer> {
   private int trænerID;
-  private Svømmedisciplin butterfly, crawl, rygcrawl, brystsvømning;
+  private Svømmedisciplin svømmedisciplin;
 
 
-
-  public KonkurrenceSvømmer(Medlem etMedlem, int trænerID, ArrayList<Svømmedisciplin> discipliner) {
+  public KonkurrenceSvømmer(Medlem etMedlem, int trænerID, Svømmedisciplin discipliner) {
     super(etMedlem.getNavn(), etMedlem.getFødselsdato(), etMedlem.getErAktiv(), etMedlem.getKontingentBalance(), etMedlem.getMedlemsnummer());
     this.trænerID = trænerID;
-    butterfly = discipliner.get(0);
-    crawl = discipliner.get(1);
-    rygcrawl = discipliner.get(2);
-    brystsvømning = discipliner.get(3);
+    this.svømmedisciplin = discipliner;
   }
 
-  public Svømmedisciplin getBrystsvømning() {
-    return brystsvømning;
-  }
-
-  public Svømmedisciplin getButterfly() {
-    return butterfly;
-  }
-
-  public Svømmedisciplin getCrawl() {
-    return crawl;
-  }
-
-  public Svømmedisciplin getRygcrawl() {
-    return rygcrawl;
+  public Svømmedisciplin getSvømmedisciplin() {
+    return svømmedisciplin;
   }
 
   @Override
   public String toString() {
     return getNavn() + ';' + getFødselsdato().getYear() + ';' +
         getFødselsdato().getMonthValue() + ';' + getFødselsdato().getDayOfMonth() + ';' +
-        getErAktiv() + ';' + getKontingentBalance() + ';' + getMedlemsnummer() + ';' + trænerID + ';' + butterfly + ';' + crawl + ';'
-        + rygcrawl + ';' + brystsvømning;
+        getErAktiv() + ';' + getKontingentBalance() + ';' + getMedlemsnummer() + ';' +
+        trænerID + ';' + svømmedisciplin;
   }
 
   @Override
-  public int compareTo(Object o) {
-    return 0;
+  public int compareTo(KonkurrenceSvømmer svømmer) {
+    return Double.compare(this.svømmedisciplin.getBedsteTræningsTidISek(), svømmer.svømmedisciplin.getBedsteTræningsTidISek());
   }
 }

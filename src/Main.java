@@ -44,12 +44,8 @@ public class Main {
          Medlem m3 = new Medlem( "Norman", LocalDate.parse("2009-03-25"), false, 0);
          Medlem m4 = new Medlem( "Helle", LocalDate.parse("1993-04-15"), true, 0);
          Svømmedisciplin s1 = new Svømmedisciplin(true, Disciplin.BUTTERFLY, 100.25,LocalDate.parse("2007-12-03"));
-         Svømmedisciplin s2 = new Svømmedisciplin(false, Disciplin.CRAWL, 2.25,LocalDate.parse("2005-03-07"));
-         Svømmedisciplin s3 = new Svømmedisciplin(true, Disciplin.RYGCRAWL, 0, null);
-         Svømmedisciplin s4 = new Svømmedisciplin(false, Disciplin.BRYSTSVØMNING, 152.00,LocalDate.parse("2010-07-15"));
-         ArrayList<Svømmedisciplin> svømmedisciplins = new ArrayList<>();
-         svømmedisciplins.addAll(Arrays.asList(s1, s2, s3, s4));
-         Medlem m5 = new KonkurrenceSvømmer(m4, 1, svømmedisciplins);
+
+         Medlem m5 = new KonkurrenceSvømmer(m4, 1, s1);
          medlemsliste.addAll(Arrays.asList(m1, m2, m3, m5));
          return medlemsliste;
      }

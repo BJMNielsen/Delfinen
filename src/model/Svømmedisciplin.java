@@ -25,6 +25,17 @@ public class Svømmedisciplin {
     datoForBedsteTid = null;
   }
 
+  public double getBedsteTræningsTidISek() {
+    return bedsteTræningsTidISek;
+  }
+
+  public Disciplin getDisciplin() {
+    return disciplin;
+  }
+
+  public boolean isErAktiv() {
+    return erAktiv;
+  }
 
   @Override
   public String toString() {

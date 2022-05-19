@@ -1,6 +1,10 @@
 package model;
 
+import com.sun.source.tree.BreakTree;
+import enums.Disciplin;
+
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Træner extends Ansat{
 
@@ -57,6 +61,60 @@ public class Træner extends Ansat{
   public void registrerKonkurrence() {
     // For de svømmere, der har deltaget i konkurrencer, registreres stævne, placering og tid.
   }
+
+  public ArrayList<KonkurrenceSvømmer> crawlOpdeling(ArrayList<KonkurrenceSvømmer> arrayTilSortering) {
+    ArrayList<KonkurrenceSvømmer> disciplinOpdeltListeCrawl = new ArrayList<>();
+    for (KonkurrenceSvømmer konkurrencesvømmer : arrayTilSortering) {
+      Svømmedisciplin svømmedisciplin = konkurrencesvømmer.getSvømmedisciplin();
+      if (svømmedisciplin.isErAktiv())
+        if (svømmedisciplin.getDisciplin() == Disciplin.CRAWL) {
+          disciplinOpdeltListeCrawl.add(konkurrencesvømmer);
+        }
+    }
+    return disciplinOpdeltListeCrawl;
+  }
+
+  public ArrayList<KonkurrenceSvømmer> rygCrawlOpdeling(ArrayList<KonkurrenceSvømmer> arrayTilSortering) {
+    ArrayList<KonkurrenceSvømmer> disciplinOpdeltListeRygCrawl = new ArrayList<>();
+    for (KonkurrenceSvømmer konkurrencesvømmer : arrayTilSortering) {
+      Svømmedisciplin svømmedisciplin = konkurrencesvømmer.getSvømmedisciplin();
+      if (svømmedisciplin.isErAktiv())
+        if (svømmedisciplin.getDisciplin() == Disciplin.RYGCRAWL) {
+          disciplinOpdeltListeRygCrawl.add(konkurrencesvømmer);
+        }
+    } return disciplinOpdeltListeRygCrawl;
+  }
+
+  public ArrayList<KonkurrenceSvømmer> brystSvømningOpdeling(ArrayList<KonkurrenceSvømmer> arrayTilSortering) {
+    ArrayList<KonkurrenceSvømmer> disciplinOpdeltListeBrystSvømning = new ArrayList<>();
+    for (KonkurrenceSvømmer konkurrencesvømmer : arrayTilSortering) {
+      Svømmedisciplin svømmedisciplin = konkurrencesvømmer.getSvømmedisciplin();
+      if (svømmedisciplin.isErAktiv())
+        if (svømmedisciplin.getDisciplin() == Disciplin.BRYSTSVØMNING) {
+          disciplinOpdeltListeBrystSvømning.add(konkurrencesvømmer);
+        }
+    } return disciplinOpdeltListeBrystSvømning;
+  }
+
+  public ArrayList<KonkurrenceSvømmer> butterflyOpdeling(ArrayList<KonkurrenceSvømmer> arrayTilSortering) {
+    ArrayList<KonkurrenceSvømmer> disciplinOpdeltListeButterfly = new ArrayList<>();
+    for (KonkurrenceSvømmer konkurrencesvømmer : arrayTilSortering) {
+      Svømmedisciplin svømmedisciplin = konkurrencesvømmer.getSvømmedisciplin();
+      if (svømmedisciplin.isErAktiv())
+        if (svømmedisciplin.getDisciplin() == Disciplin.BUTTERFLY) {
+          disciplinOpdeltListeButterfly.add(konkurrencesvømmer);
+        }
+    } return disciplinOpdeltListeButterfly;
+  }
+
+public ArrayList<KonkurrenceSvømmer> top5KonkurrenceSvømmerer(ArrayList<KonkurrenceSvømmer> disciplinListe){
+  Collections.sort(disciplinListe);
+  ArrayList<KonkurrenceSvømmer> top5 = new ArrayList<>();
+  for (int i = 0; i < 4; i++) {
+    top5.add(disciplinListe.get(i));
+  }
+  return top5;
+}
 
   public static void setStaticTrænerID(int staticTrænerID) {
     Træner.staticTrænerID = staticTrænerID;

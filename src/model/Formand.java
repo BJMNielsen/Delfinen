@@ -42,12 +42,12 @@ public class Formand extends Ansat{
 
 
 
-  public void indmeldKonkurrencesvømmer(Medlem etMedlem, int trænerID, ArrayList<Svømmedisciplin> discipliner) {
+  public void indmeldKonkurrencesvømmer(Medlem etMedlem, int trænerID, Svømmedisciplin discipliner) {
     KonkurrenceSvømmer enKonkurrencesvømmer = new KonkurrenceSvømmer(etMedlem, trænerID, discipliner);
     addKonkurrencesvømmer(enKonkurrencesvømmer);
   }
 
-  public boolean upgradeTilKonkurrencesvømmer(int medlemsnummer, int trænerID, ArrayList<Svømmedisciplin> discipliner) {
+  public boolean upgradeTilKonkurrencesvømmer(int medlemsnummer, int trænerID, Svømmedisciplin discipliner) {
     ArrayList<Medlem> medlemsListe = getMedlemsListen();
     for (Medlem etMedlem : medlemsListe) {
      int aktuelleMedlemsnummer = etMedlem.getMedlemsnummer();
