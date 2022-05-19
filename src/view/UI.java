@@ -24,11 +24,42 @@ public class UI {
         System.out.println("""
                 
                 Velkommen til Delfinprogrammet.
+                
                 Vil du logge ind eller lukke programmet ned?
+                
                 1) Login
-                0) Luk
+                0) exit program
                 """);
     }
+
+    public void exitProgramMessage() {
+        System.out.println("Programmet lukker nu");
+    }
+
+    public void filesWereSavedSuccesfully(){
+        System.out.println("Programmet gemmer medlems- og ansatlisten i hver deres fil.");
+        System.out.println("Tak fordi du benytter Delfin programmet.");
+    }
+
+    public void inputIsInvalid(int helTal){
+        System.out.println("dit input '" + helTal + "' er invalid.");
+    }
+
+
+    public void inputIsInvalid(String tekst){
+        System.out.println("dit input '" + tekst + "' er invalid.");
+    }
+
+    public void inputIsInvalid(double kommaTal){
+        System.out.println("dit input '" + kommaTal + "' er invalid.");
+    }
+
+
+
+    public void typeHere(){
+        System.out.print("type here: ");
+    }
+
 
     public void indtastBrugernavn() {
         System.out.println("Indtast dit brugernavn: ");
