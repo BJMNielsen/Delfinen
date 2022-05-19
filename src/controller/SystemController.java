@@ -5,10 +5,6 @@ import view.UI;
 public class SystemController {
     private UI ui;
 
-    public SystemController() {
-        ui = new UI();
-    }
-
 
     public void start() {
         // load filer
