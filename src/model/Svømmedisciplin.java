@@ -3,6 +3,7 @@ package model;
 import enums.Disciplin;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class Svømmedisciplin {
   private boolean erAktiv;
@@ -35,6 +36,18 @@ public class Svømmedisciplin {
 
   public boolean isErAktiv() {
     return erAktiv;
+  }
+
+  public String getErAktivSomTekst() {
+    if (erAktiv) {
+      return "aktiv";
+    }
+    return "inaktiv";
+  }
+
+  public String getDatoForBedsteTidFormateret() {
+    DateTimeFormatter danishDateFormat = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+    return datoForBedsteTid.format(danishDateFormat);
   }
 
   @Override

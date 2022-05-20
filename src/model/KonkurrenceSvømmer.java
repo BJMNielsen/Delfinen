@@ -24,6 +24,10 @@ public class KonkurrenceSvømmer extends Medlem implements Comparable<Konkurrenc
         trænerID + ';' + svømmedisciplin;
   }
 
+  public int getTrænerID() {
+    return trænerID;
+  }
+
   @Override
   public int compareTo(KonkurrenceSvømmer svømmer) {
     return Double.compare(this.svømmedisciplin.getBedsteTræningsTidISek(), svømmer.svømmedisciplin.getBedsteTræningsTidISek());

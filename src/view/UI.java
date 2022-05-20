@@ -1,5 +1,9 @@
 package view;
 
+import model.KonkurrenceSvømmer;
+import model.Medlem;
+
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class UI {
@@ -37,7 +41,11 @@ public class UI {
     }
 
     public void typeHere(){
-        System.out.print("type here: ");
+        System.out.print("Indtast dit valg her: ");
+    }
+
+    public void ansatMenuWelcomeMessage(String brugerNavn) {
+        System.out.println("Velkommen " + brugerNavn + ".\n");
     }
 
     //Bliver kun brugt i SystemController klassen
@@ -122,6 +130,20 @@ public class UI {
                 """);
     }
 
+    public void printMedlemsliste(ArrayList<Medlem> medlemsliste) {
+
+        System.out.println("MEDLEMSLISTE:\n");
+        for (Medlem etMedlem: medlemsliste) {
+            int medlemsnummer = etMedlem.getMedlemsnummer();
+            String navn = etMedlem.getNavn();
+            String fødselsdato = etMedlem.getFødselsdatoSomTekst();
+            String aktivitet = etMedlem.getErAktivSomTekst();
+            double kontingentBalance = etMedlem.getKontingentBalance();
+            System.out.println("Nr. " + medlemsnummer + " " + navn + " " + fødselsdato + " " + aktivitet + ", balance: " + kontingentBalance + " kr.");
+        }
+        System.out.println('\n');
+    }
+
 
     //Træner UI
     public void trænerMenu() {
@@ -129,13 +151,36 @@ public class UI {
                 Menu Træner
                 
                 1) Vis medlemsliste
-                2) Vis top 5
-                3) Tilføj konkurrence information
+                2) Vis konkurrencesvømmerer
+                3) Vis top 5 svømmerer i en disciplin
                 0) Log ud
                 
                 """);
     }
 
 
+    public void printKonkurrenceSvømmer(ArrayList<KonkurrenceSvømmer> konkurrenceSvømmerListe) {
+        System.out.println("KONKURRENCESVØMMERLISTE:\n");
+        for (KonkurrenceSvømmer enKonkurrenceSvømmer: konkurrenceSvømmerListe) {
+            int medlemsnummer = enKonkurrenceSvømmer.getMedlemsnummer();
+            String navn = enKonkurrenceSvømmer.getNavn();
+            String fødselsdato = enKonkurrenceSvømmer.getFødselsdatoSomTekst();
+            String aktivitet = enKonkurrenceSvømmer.getErAktivSomTekst();
+            double kontingentBalance = enKonkurrenceSvømmer.getKontingentBalance();
+            
+            int trænerID = enKonkurrenceSvømmer.getTrænerID();
+            String disciplinAktiv = enKonkurrenceSvømmer.getSvømmedisciplin().getErAktivSomTekst();
+            String disciplin = String.valueOf(enKonkurrenceSvømmer.getSvømmedisciplin().getDisciplin());
+            double bedsteTræningsTid = enKonkurrenceSvømmer.getSvømmedisciplin().getBedsteTræningsTidISek();
+            String datoForBedsteTid = enKonkurrenceSvømmer.getSvømmedisciplin().getDatoForBedsteTidFormateret();
+            
+            
+            System.out.println("Nr. " + medlemsnummer + " " + navn + " " + fødselsdato + " " + aktivitet + ", balance: " + kontingentBalance + " kr." 
+                    + " " + trænerID + " " + disciplinAktiv + " " + disciplin + " " + bedsteTræningsTid + " " + datoForBedsteTid);
+        }
+        System.out.println('\n');
+    }
 
+    public void printTop5(ArrayList<KonkurrenceSvømmer> top5) {
+    }
 }

@@ -1,6 +1,8 @@
 package model;
 
+import javax.swing.text.DateFormatter;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 // et medlem er en motionssvømmer
 public class Medlem {
@@ -38,7 +40,7 @@ public class Medlem {
   // Getters & Setters
 
   public int getMedlemsnummer() {
-    return staticMedlemsnummer;
+    return medlemsnummer;
   }
 
   public String getNavn() {
@@ -47,8 +49,19 @@ public class Medlem {
   public LocalDate getFødselsdato() {
     return fødselsdato;
   }
+  public String getFødselsdatoSomTekst() {
+    DateTimeFormatter danishDateFormat = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+    return fødselsdato.format(danishDateFormat);
+  }
+
   public boolean getErAktiv() {
     return erAktiv;
+  }
+  public String getErAktivSomTekst() {
+    if (erAktiv) {
+      return "aktiv";
+    }
+    return "inaktiv";
   }
 
   public double getKontingentBalance() {

@@ -29,8 +29,8 @@ public class SystemController {
 
   public void start() throws FileNotFoundException {
     boolean isRunning = true;
-    ui.welcomeMessage();
     while (isRunning) {
+      ui.welcomeMessage();
       isRunning = userChoice();
 
     }
@@ -100,7 +100,7 @@ public class SystemController {
 
   public boolean erPasswordKorrekt(Ansat enAnsat, String inputPassword) {
     String KorrektPassword = enAnsat.getPassword();
-    if (inputPassword.equals(inputPassword)) {
+    if (inputPassword.equals(KorrektPassword)) {
       ui.korrektPassword();
       return true;
     }
@@ -111,19 +111,19 @@ public class SystemController {
   public void loginSom(Ansat enAnsat) {
     if(enAnsat instanceof Formand){
       Formand formand = (Formand)enAnsat;
-      FormandController formanden = new FormandController(ansatListe, formand);
+      FormandController formanden = new FormandController(ansatListe, formand, ui);
       formanden.start();
     }
 
     if(enAnsat instanceof Kasserer){
       Kasserer kasserer = (Kasserer)enAnsat;
-      KassererController kassereren = new KassererController(ansatListe, kasserer);
+      KassererController kassereren = new KassererController(ansatListe, kasserer, ui);
       kassereren.start();
     }
 
     if(enAnsat instanceof Træner){
       Træner træner = (Træner)enAnsat;
-      TrænerController enTræner = new TrænerController(ansatListe, træner);
+      TrænerController enTræner = new TrænerController(ansatListe, træner, ui);
       enTræner.start();
     }
   }
