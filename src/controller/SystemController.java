@@ -1,8 +1,6 @@
 package controller;
 
-import model.Ansat;
-import model.Filhåndtering;
-import model.Medlem;
+import model.*;
 import view.UI;
 
 import java.io.FileNotFoundException;
@@ -19,7 +17,7 @@ public class SystemController {
     filhåndtering = new Filhåndtering();
     ansatListe = filhåndtering.loadAnsatLoginListe();
     medlemListe = filhåndtering.loadMedlemsliste();
-    giveAllSameList(medlemListe,ansatListe);
+    giveAllSameList(medlemListe, ansatListe);
   }
 
   public void giveAllSameList(ArrayList<Medlem> medlemListe, ArrayList<Ansat> ansatListe) {
@@ -32,7 +30,7 @@ public class SystemController {
   public void start() throws FileNotFoundException {
     boolean isRunning = true;
     ui.welcomeMessage();
-    while(isRunning){
+    while (isRunning) {
       isRunning = userChoice();
 
     }
@@ -43,16 +41,15 @@ public class SystemController {
     ui.typeHere();
     int choice = ui.getIntInput();
 
-    switch(choice) {
+    switch (choice) {
       case 1:
-
-      return true;
+        indtastLoginInfo();
+        return true;
 
       case 0:
         ui.exitProgramMessage();
         closeProgramAndSaveFile();
         return false;
-
 
       default:
         ui.inputIsInvalid(choice);
@@ -70,7 +67,64 @@ public class SystemController {
 
 
   public void indtastLoginInfo() {
-    //ui.indtastNoget("brugernavn");
-    // String brugerNavn = ui.userIput();
+    boolean forkertLogin = true;
+    while (forkertLogin) {
+      ui.indtastBrugernavn();
+      String brugerNavnInput = ui.getStringInput();
+      Ansat enAnsat = søgAnsatViaBrugerNavn(brugerNavnInput);
+      if (enAnsat != null) {
+        ui.indtastPassword();
+        String passwordInput = ui.getStringInput();
+        if(erPasswordKorrekt(enAnsat, passwordInput)){
+          forkertLogin = false;
+          loginSom(enAnsat);
+        }
+
+      }
+
+    }
+
+  }
+
+  public Ansat søgAnsatViaBrugerNavn(String brugerInputNavn) {
+    for (Ansat enAnsat : ansatListe) {
+      if (enAnsat.getBrugerLogin().equals(brugerInputNavn)) {
+        ui.korrektBrugerNavn();
+        return enAnsat;
+      }
+    }
+    ui.forkertBrugerNavn();
+    return null;
+  }
+
+
+  public boolean erPasswordKorrekt(Ansat enAnsat, String inputPassword) {
+    String KorrektPassword = enAnsat.getPassword();
+    if (inputPassword.equals(inputPassword)) {
+      ui.korrektPassword();
+      return true;
+    }
+    ui.forkertPassword();
+    return false;
+  }
+
+  public void loginSom(Ansat enAnsat) {
+    if(enAnsat instanceof Formand){
+      Formand formand = (Formand)enAnsat;
+      FormandController formanden = new FormandController(ansatListe, formand);
+      formanden.start();
+    }
+
+    if(enAnsat instanceof Kasserer){
+      Kasserer kasserer = (Kasserer)enAnsat;
+      KassererController kassereren = new KassererController(ansatListe, kasserer);
+      kassereren.start();
+    }
+
+    if(enAnsat instanceof Træner){
+      Træner træner = (Træner)enAnsat;
+      TrænerController enTræner = new TrænerController(ansatListe, træner);
+      enTræner.start();
+    }
   }
 }

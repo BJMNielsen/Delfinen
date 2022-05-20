@@ -6,6 +6,8 @@ public class UI {
     private final Scanner stringInput = new Scanner(System.in);
     private final Scanner intInput = new Scanner(System.in);
 
+
+        //General UI
         public int getIntInput() {
             try{
                 return intInput.nextInt();
@@ -20,27 +22,7 @@ public class UI {
             return stringInput.nextLine();
         }
 
-    public void welcomeMessage() {
-        System.out.println("""
-                
-                Velkommen til Delfinprogrammet.
-                
-                Vil du logge ind eller lukke programmet ned?
-                
-                1) Login
-                0) exit program
-                """);
-    }
-
-    public void exitProgramMessage() {
-        System.out.println("Programmet lukker nu");
-    }
-
-    public void filesWereSavedSuccesfully(){
-        System.out.println("Programmet gemmer medlems- og ansatlisten i hver deres fil.");
-        System.out.println("Tak fordi du benytter Delfin programmet.");
-    }
-
+    //General UI
     public void inputIsInvalid(int helTal){
         System.out.println("dit input '" + helTal + "' er invalid.");
     }
@@ -54,28 +36,66 @@ public class UI {
         System.out.println("dit input '" + kommaTal + "' er invalid.");
     }
 
-
-
     public void typeHere(){
         System.out.print("type here: ");
     }
 
+    //Bliver kun brugt i SystemController klassen
+    public void welcomeMessage() {
+        System.out.println("""
+                
+                Velkommen til Delfinprogrammet.
+                
+                Vil du logge ind eller lukke programmet ned?
+                
+                1) Login
+                0) exit program
+                """);
+    }
 
+
+    //Bliver kun brugt i SystemController klassen
+    public void exitProgramMessage() {
+        System.out.println("Programmet lukker nu");
+    }
+
+
+    //Bliver kun brugt i SystemController klassen
+    public void filesWereSavedSuccesfully(){
+        System.out.println("Programmet gemmer medlems- og ansatlisten i hver deres fil.");
+        System.out.println("Tak fordi du benytter Delfin programmet.");
+    }
+
+
+
+    //Bliver kun brugt i SystemController klassen
     public void indtastBrugernavn() {
-        System.out.println("Indtast dit brugernavn: ");
+        System.out.print("Indtast dit brugernavn: ");
     }
 
     public void indtastPassword() {
-        System.out.println("Indtast dit password: ");
+        System.out.print("Indtast dit password: ");
     }
 
-    public void invalidLoginInformation() {
-        System.out.println("""
-            Indtast dit brugernavn eller kodeord igen.
-                Den information du indtastede var forkert.""");
-
+    public void korrektBrugerNavn(){
+        System.out.println("Brugernavnet er korrekt.");
     }
 
+    public void korrektPassword(){
+        System.out.println("Password er korrekt.");
+    }
+
+    public void forkertBrugerNavn(){
+        System.out.println("Du har indtastet et forkert brugernavn.");
+    }
+
+    public void forkertPassword(){
+        System.out.println("Du har indtastet et forkert password.");
+    }
+
+
+
+    //Kasserer UI
     public void kassererMenu() {
         System.out.println("""
                 Menu Kasserer
@@ -88,6 +108,7 @@ public class UI {
                 """);
     }
 
+    //Formand UI
     public void formandMenu() {
         System.out.println("""
                 Menu Formand
@@ -101,6 +122,8 @@ public class UI {
                 """);
     }
 
+
+    //Træner UI
     public void trænerMenu() {
         System.out.println("""
                 Menu Træner

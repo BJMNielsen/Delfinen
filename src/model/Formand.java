@@ -1,6 +1,5 @@
 package model;
 
-import view.UI;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -15,6 +14,7 @@ public class Formand extends Ansat{
   public Formand(String brugerNavn, String password) {
     super(brugerNavn, password);
   }
+
 
   public Medlem indmeldMedlem(String navn, LocalDate fødselsdato, boolean erAktiv, boolean erKonkurrencesvømmer, int kontingentBalance) {
     Medlem etMedlem = new Medlem(navn, fødselsdato, erAktiv, kontingentBalance);

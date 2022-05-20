@@ -11,7 +11,13 @@ import java.util.Arrays;
 public class Main {
 
     public static void main(String[] args) throws FileNotFoundException {
-        new Main().run();
+        //new Main().run();
+        new Main().go();
+    }
+
+    public void go() throws FileNotFoundException {
+        SystemController delfinKlubben = new SystemController();
+        delfinKlubben.start();
     }
 
     public void run() throws FileNotFoundException {
