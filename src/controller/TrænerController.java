@@ -11,6 +11,7 @@ import java.util.ArrayList;
 public class TrænerController {
 
     private ArrayList<Ansat> ansatListe;
+    private ArrayList<KonkurrenceSvømmer> konkurrenceSvømmere;
     private Træner enTræner;
     private UI ui;
 
@@ -26,12 +27,6 @@ public class TrænerController {
         boolean isRunning = true;
         ui.ansatMenuWelcomeMessage(enTræner.getBrugerLogin());
         while (isRunning) {
-//            Menu Træner
-//
-//            1) Vis medlemsliste
-//            2) Vis konkurrence svømmer
-//            3) Vis top 5 i en disciplin
-//            0) Log ud
             ui.trænerMenu();
             isRunning = userChoice();
         }
@@ -45,25 +40,39 @@ public class TrænerController {
             case 1:
                 visMedlemslisten();
                 return true;
-
             case 2:
                 visKonkurrenceSvømmere();
                 return true;
-
             case 3:
-                // visTop5();
+                visJuniorHold();
                 return true;
-
+            case 4:
+                visSeniorHold();
+                return true;
+            case 5:
+                visCrawlOpdeling();
+                return true;
+            case 6:
+                visRygCrawlOpdeling();
+                return true;
+            case 7:
+                visBrystSvømningOpdeling();
+                return true;
+            case 8:
+                visButterflyOpdeling();
+                return true;
+            case 9:
+                visTop5KonkurrenceSvømmerer();
+                return true;
             case 0:
-
+                ui.exitProgramMessage();
                 return false;
-
             default:
                 ui.inputIsInvalid(choice);
                 return true;
         }
-
     }
+
 
     public void visMedlemslisten() {
         ArrayList<Medlem> medlemsliste = enTræner.getMedlemsListen();
@@ -73,10 +82,32 @@ public class TrænerController {
         ArrayList<KonkurrenceSvømmer> konkurrenceSvømmerListe = enTræner.skafKonkurrenceSvømmerer();
         ui.printKonkurrenceSvømmer(konkurrenceSvømmerListe);
     }
-    public void visTop5(){
-       // ArrayList<KonkurrenceSvømmer> top5 = enTræner.top5KonkurrenceSvømmerer();
-       // ui.printTop5(top5);
+    public void visJuniorHold(){
+       ArrayList<KonkurrenceSvømmer> juniourHold = enTræner.skafJuniorHold(konkurrenceSvømmere);
+       ui.printJuniorHold(juniourHold);
     }
-
-
+    public void visSeniorHold(){
+        ArrayList<KonkurrenceSvømmer> seniorHold = enTræner.skafSeniorHold(konkurrenceSvømmere);
+        ui.printSeniorHold(seniorHold);
+    }
+    public void visCrawlOpdeling(){
+        ArrayList<KonkurrenceSvømmer> crawlOpdeling = enTræner.crawlOpdeling(konkurrenceSvømmere);
+        ui.printCrawlOpdeling(crawlOpdeling);
+    }
+    public void visRygCrawlOpdeling(){
+        ArrayList<KonkurrenceSvømmer> rygCrawlOpdeling = enTræner.rygCrawlOpdeling(konkurrenceSvømmere);
+        ui.printRygCrawlOpdeling(rygCrawlOpdeling);
+    }
+    public void visBrystSvømningOpdeling(){
+        ArrayList<KonkurrenceSvømmer> brystSvømningOpdeling = enTræner.brystSvømningOpdeling(konkurrenceSvømmere);
+        ui.printBrystSwømningOpdeling(brystSvømningOpdeling);
+    }
+    public void visButterflyOpdeling(){
+        ArrayList<KonkurrenceSvømmer> butterFlyOpdeling = enTræner.butterflyOpdeling(konkurrenceSvømmere);
+        ui.printBytterflyOpdeling(butterFlyOpdeling);
+    }
+    public void visTop5KonkurrenceSvømmerer(){
+        ArrayList<KonkurrenceSvømmer> top5 = enTræner.top5KonkurrenceSvømmerer(konkurrenceSvømmere);
+        ui.printTop5(top5);
+    }
 }

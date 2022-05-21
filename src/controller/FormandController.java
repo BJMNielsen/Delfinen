@@ -5,7 +5,6 @@ import model.Formand;
 import model.Medlem;
 import view.UI;
 
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 public class FormandController {

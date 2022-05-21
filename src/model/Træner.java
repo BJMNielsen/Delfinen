@@ -1,6 +1,5 @@
 package model;
 
-import com.sun.source.tree.BreakTree;
 import enums.Disciplin;
 
 import java.util.ArrayList;
@@ -48,6 +47,7 @@ public class Træner extends Ansat{
     }
     return juniorKonkurrenceSvømmere;
   }
+
   public ArrayList<KonkurrenceSvømmer> skafSeniorHold (ArrayList<KonkurrenceSvømmer> konkurrenceSvømmers) {
     ArrayList<KonkurrenceSvømmer> seniorKonkurrenceSvømmere = new ArrayList<>();
     for (int i = 0; i < konkurrenceSvømmers.size(); i++) {
@@ -56,10 +56,6 @@ public class Træner extends Ansat{
       }
     }
     return seniorKonkurrenceSvømmere;
-  }
-
-  public void registrerKonkurrence() {
-    // For de svømmere, der har deltaget i konkurrencer, registreres stævne, placering og tid.
   }
 
   public ArrayList<KonkurrenceSvømmer> crawlOpdeling(ArrayList<KonkurrenceSvømmer> arrayTilSortering) {
@@ -107,19 +103,21 @@ public class Træner extends Ansat{
     } return disciplinOpdeltListeButterfly;
   }
 
-public ArrayList<KonkurrenceSvømmer> top5KonkurrenceSvømmerer(ArrayList<KonkurrenceSvømmer> disciplinListe){
-  Collections.sort(disciplinListe);
-  ArrayList<KonkurrenceSvømmer> top5 = new ArrayList<>();
-  for (int i = 0; i < 4; i++) {
-    top5.add(disciplinListe.get(i));
+  public ArrayList<KonkurrenceSvømmer> top5KonkurrenceSvømmerer(ArrayList<KonkurrenceSvømmer> disciplinListe){
+    Collections.sort(disciplinListe);
+    ArrayList<KonkurrenceSvømmer> top5 = new ArrayList<>();
+    for (int i = 0; i < 4; i++) {
+      top5.add(disciplinListe.get(i));
+    } return top5;
   }
-  return top5;
-}
+
+  public void registrerKonkurrence() {
+    // For de svømmere, der har deltaget i konkurrencer, registreres stævne, placering og tid.
+  }
 
   public static void setStaticTrænerID(int staticTrænerID) {
     Træner.staticTrænerID = staticTrænerID;
   }
-
 
   public static int getStaticTrænerID() {
     return staticTrænerID;
@@ -129,6 +127,5 @@ public ArrayList<KonkurrenceSvømmer> top5KonkurrenceSvømmerer(ArrayList<Konkur
   public String toString() {
     return getBrugerLogin() + ";" + getPassword() + ";" + trænerID;
   }
-
 
 }
