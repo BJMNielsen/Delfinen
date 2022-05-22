@@ -7,7 +7,7 @@ public class KonkurrenceSvømmer extends Medlem implements Comparable<Konkurrenc
 
 
   public KonkurrenceSvømmer(Medlem etMedlem, int trænerID, Svømmedisciplin discipliner) {
-    super(etMedlem.getNavn(), etMedlem.getFødselsdato(), etMedlem.getErAktiv(), etMedlem.getKontingentBalance(), etMedlem.getMedlemsnummer());
+    super(etMedlem.getNavn(), etMedlem.getFødselsdato(), etMedlem.getErAktiv(), etMedlem.isErKonkurrencesvømmer(), etMedlem.getKontingentBalance(), etMedlem.getMedlemsnummer());
     this.trænerID = trænerID;
     this.svømmedisciplin = discipliner;
   }

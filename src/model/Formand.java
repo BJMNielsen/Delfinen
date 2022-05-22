@@ -17,7 +17,7 @@ public class Formand extends Ansat{
 
 
   public Medlem indmeldMedlem(String navn, LocalDate fødselsdato, boolean erAktiv, boolean erKonkurrencesvømmer, int kontingentBalance) {
-    Medlem etMedlem = new Medlem(navn, fødselsdato, erAktiv, kontingentBalance);
+    Medlem etMedlem = new Medlem(navn, fødselsdato, erAktiv,erKonkurrencesvømmer, kontingentBalance);
 
     if(erKonkurrencesvømmer){
       return etMedlem;
@@ -47,7 +47,7 @@ public class Formand extends Ansat{
     addKonkurrencesvømmer(enKonkurrencesvømmer);
   }
 
-  public boolean upgradeTilKonkurrencesvømmer(int medlemsnummer, int trænerID, Svømmedisciplin discipliner) {
+  public boolean opgraderTilKonkurrencesvømmer(int medlemsnummer, int trænerID, Svømmedisciplin discipliner) {
     ArrayList<Medlem> medlemsListe = getMedlemsListen();
     for (Medlem etMedlem : medlemsListe) {
      int aktuelleMedlemsnummer = etMedlem.getMedlemsnummer();

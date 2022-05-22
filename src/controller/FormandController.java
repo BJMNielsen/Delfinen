@@ -2,6 +2,7 @@ package controller;
 
 import model.Ansat;
 import model.Formand;
+import model.KonkurrenceSvømmer;
 import model.Medlem;
 import view.UI;
 
@@ -12,6 +13,9 @@ public class FormandController {
     private ArrayList<Ansat> ansatListe;
     private Formand formanden;
     private UI ui;
+    private Medlem etMedlem;
+    private KonkurrenceSvømmer enKonkurrenceSvømmer;
+    ArrayList<Medlem> medlemsliste = formanden.getMedlemsListen();
 
 
     FormandController(ArrayList<Ansat> ansatListe, Formand formand, UI ui) {
@@ -25,16 +29,6 @@ public class FormandController {
         boolean isRunning = true;
         ui.ansatMenuWelcomeMessage(formanden.getBrugerLogin());
         while (isRunning) {
-//
-//                Menu Formand
-//
-//                1) Vis medlemsliste
-//                2) Opret medlem
-//                3) Fjern medlem
-//                4) Opgrader medlem til konkurrencesvømmer TODO lav metode metode
-//                0) Log ud
-//
-//
             ui.formandMenu();
             isRunning = userChoice();
         }
@@ -50,7 +44,7 @@ public class FormandController {
                 return true;
 
             case 2:
-                opretMedlem();
+                indmeldMedlem();
                 return true;
 
             case 3:
@@ -58,7 +52,7 @@ public class FormandController {
                 return true;
 
             case 4:
-                opgraderMedlem();
+                opgraderTilKonkurrenceSvømmer();
                 return true;
 
             case 0:
@@ -73,19 +67,22 @@ public class FormandController {
     }
 
     public void visMedlemslisten() {
-        ArrayList<Medlem> medlemsliste = formanden.getMedlemsListen();
         ui.printMedlemsliste(medlemsliste);
     }
 
-    public void opretMedlem() {
-
+    public void indmeldMedlem() {
+        formanden.indmeldMedlem(etMedlem.getNavn(),etMedlem.getFødselsdato(),etMedlem.getErAktiv(),etMedlem.isErKonkurrencesvømmer(), (int) etMedlem.getKontingentBalance());
+        ui.printMedlemsliste(medlemsliste);
     }
 
     public void fjernMedlem() {
+        formanden.fjernMedlem(etMedlem.getMedlemsnummer());
+        ui.printMedlemsliste(medlemsliste);
 
     }
 
-    public void opgraderMedlem() {
-
+    public void opgraderTilKonkurrenceSvømmer() {
+        formanden.opgraderTilKonkurrencesvømmer(enKonkurrenceSvømmer.getMedlemsnummer(),enKonkurrenceSvømmer.getTrænerID(),enKonkurrenceSvømmer.getSvømmedisciplin());
+        ui.printMedlemsliste(medlemsliste);
     }
 }
