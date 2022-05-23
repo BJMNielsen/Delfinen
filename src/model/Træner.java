@@ -64,26 +64,54 @@ public class Træner extends Ansat{
   public ArrayList<KonkurrenceSvømmer> crawlOpdeling(ArrayList<KonkurrenceSvømmer> arrayTilSortering) {
     SorterKonkurrenceSvømmer sorterListe = new SorterKonkurrenceSvømmer();
     Disciplin crawl = Disciplin.CRAWL;
+    arrayTilSortering = fjerneKonkurrencesvømmerMedManglendeTider(arrayTilSortering, crawl);
     return sorterListe.efterDisciplin(arrayTilSortering, crawl);
   }
 
   public ArrayList<KonkurrenceSvømmer> rygCrawlOpdeling(ArrayList<KonkurrenceSvømmer> arrayTilSortering) {
     SorterKonkurrenceSvømmer sorterListe = new SorterKonkurrenceSvømmer();
     Disciplin rygcrawl = Disciplin.RYGCRAWL;
+    arrayTilSortering = fjerneKonkurrencesvømmerMedManglendeTider(arrayTilSortering, rygcrawl);
     return sorterListe.efterDisciplin(arrayTilSortering, rygcrawl);
   }
 
   public ArrayList<KonkurrenceSvømmer> brystSvømningOpdeling(ArrayList<KonkurrenceSvømmer> arrayTilSortering) {
     SorterKonkurrenceSvømmer sorterListe = new SorterKonkurrenceSvømmer();
     Disciplin brystsvømning = Disciplin.BRYSTSVØMNING;
+    arrayTilSortering = fjerneKonkurrencesvømmerMedManglendeTider(arrayTilSortering, brystsvømning);
     return sorterListe.efterDisciplin(arrayTilSortering, brystsvømning);
   }
 
   public ArrayList<KonkurrenceSvømmer> butterflyOpdeling(ArrayList<KonkurrenceSvømmer> arrayTilSortering) {
     SorterKonkurrenceSvømmer sorterListe = new SorterKonkurrenceSvømmer();
     Disciplin butterfly = Disciplin.BUTTERFLY;
+    arrayTilSortering = fjerneKonkurrencesvømmerMedManglendeTider(arrayTilSortering, butterfly);
     return sorterListe.efterDisciplin(arrayTilSortering, butterfly);
   }
+
+
+  public ArrayList<KonkurrenceSvømmer> fjerneKonkurrencesvømmerMedManglendeTider(ArrayList<KonkurrenceSvømmer> listeDerSorteres, Disciplin disciplin) {
+   for(KonkurrenceSvømmer enKonkurrenceSvømmer : listeDerSorteres){
+     double bedsteTidISek = 0;
+     if (enKonkurrenceSvømmer.getButterfly().getDisciplin() == disciplin) {
+       bedsteTidISek = enKonkurrenceSvømmer.getButterfly().getBedsteTræningsTidISek();
+     }
+     if (enKonkurrenceSvømmer.getCrawl().getDisciplin() == disciplin) {
+       bedsteTidISek = enKonkurrenceSvømmer.getCrawl().getBedsteTræningsTidISek();
+     }
+     if (enKonkurrenceSvømmer.getRygcrawl().getDisciplin() == disciplin) {
+       bedsteTidISek = enKonkurrenceSvømmer.getRygcrawl().getBedsteTræningsTidISek();
+     }
+     if (enKonkurrenceSvømmer.getBrystsvømning().getDisciplin() == disciplin) {
+       bedsteTidISek = enKonkurrenceSvømmer.getBrystsvømning().getBedsteTræningsTidISek();
+     }
+     if (bedsteTidISek == 0) {
+       listeDerSorteres.remove(enKonkurrenceSvømmer);
+     }
+   }
+    return listeDerSorteres;
+  }
+
 
   public ArrayList<KonkurrenceSvømmer> top5KonkurrenceSvømmerer(ArrayList<KonkurrenceSvømmer> disciplinListe){
 

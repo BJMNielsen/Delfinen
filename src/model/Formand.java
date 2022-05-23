@@ -29,16 +29,6 @@ public class Formand extends Ansat{
   }
 
 
-  public boolean erUnikID(int medlemsnummer) {
-    ArrayList<Medlem> medlemsListe = getMedlemsListen();
-    for (Medlem etMedlem : medlemsListe) {
-      int aktuelleMedlemsnummer = etMedlem.getMedlemsnummer();
-      if (aktuelleMedlemsnummer == medlemsnummer) {
-        return false;
-      }
-    }
-    return true;
-  }
 
 
 

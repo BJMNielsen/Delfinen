@@ -75,8 +75,8 @@ public class TrænerController {
 
 
     public void visMedlemslisten() {
-        ArrayList<Medlem> medlemsliste = enTræner.getMedlemsListen();
-        ui.printMedlemsliste(medlemsliste);
+        ArrayList<KonkurrenceSvømmer> medlemsliste = enTræner.skafKonkurrenceSvømmerer();
+        ui.printKonkurrenceSvømmerListe(medlemsliste);
     }
     public void visKonkurrenceSvømmere() {
         ArrayList<KonkurrenceSvømmer> konkurrenceSvømmerListe = enTræner.skafKonkurrenceSvømmerer();

@@ -160,6 +160,19 @@ public class UI {
                 """);
     }
 
+    public void printKonkurrenceSvømmerListe(ArrayList<KonkurrenceSvømmer> KonkurrencesvømmerListe) {
+        System.out.println("Konkurrence:\n");
+        for (KonkurrenceSvømmer enKonkurrenceSvømmer: KonkurrencesvømmerListe) {
+            int medlemsnummer = enKonkurrenceSvømmer.getMedlemsnummer();
+            String navn = enKonkurrenceSvømmer.getNavn();
+            String fødselsdato = enKonkurrenceSvømmer.getFødselsdatoSomTekst();
+            String aktivitet = enKonkurrenceSvømmer.getErAktivSomTekst();
+            double kontingentBalance = enKonkurrenceSvømmer.getKontingentBalance();
+            System.out.println("Nr. " + medlemsnummer + " " + navn + " " + fødselsdato + " " + aktivitet + ", balance: " + kontingentBalance + " kr.");
+        }
+        System.out.println('\n');
+    }
+
     public void printMedlemsliste(ArrayList<Medlem> medlemsliste) {
         System.out.println("MEDLEMSLISTE:\n");
         for (Medlem etMedlem: medlemsliste) {
@@ -172,6 +185,7 @@ public class UI {
         }
         System.out.println('\n');
     }
+
     public void askForMedlemInfo(String tekst){
         System.out.println("Hvad er medlemmmets " + tekst + "?");
     }
