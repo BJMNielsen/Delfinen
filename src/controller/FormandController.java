@@ -96,14 +96,72 @@ public class FormandController {
     }
 
     private LocalDate createDateFromIntInput() {
-        ui.askForMedlemInfo("fødselsår");
-        int år = ui.getIntInput();
-        ui.askForMedlemInfo("fødselsmåned");
-        int måned = ui.getIntInput();
-        ui.askForMedlemInfo("fødselsdag");
-        int dag = ui.getIntInput();
+        int år = inputFødselsÅr();
+
+        int måned = inputFødselsMåned(år);
+
+        int dag = inputFødselsDag(år, måned);
+
         return LocalDate.of(år,måned,dag);
     }
+
+    private int inputFødselsÅr() {
+        boolean isRunning = true;
+        int fødeÅr = -1;
+        int nuværrendeÅr = LocalDate.now().getYear();
+        while (isRunning) {
+            ui.askForMedlemInfo("fødselsår");
+            ui.typeHere();
+            fødeÅr = ui.getIntInput();
+            if (fødeÅr <= nuværrendeÅr && fødeÅr > 1900) {
+                isRunning = false;
+            }
+        }
+        return fødeÅr;
+    }
+
+    private int inputFødselsMåned(int fødeÅr) {
+        boolean isRunning = true;
+        int fødeMåned = -1;
+        int nuværrendeÅr = LocalDate.now().getYear();
+        int nuværrendeMåned = LocalDate.now().getMonthValue();
+        while (isRunning) {
+            ui.askForMedlemInfo("fødselsmåned");
+            ui.typeHere();
+            fødeMåned = ui.getIntInput();
+            if (fødeÅr == nuværrendeÅr) {
+                if (fødeMåned >= 1 && fødeMåned <= nuværrendeMåned) {
+                    isRunning = false;
+                }
+            } else if (fødeMåned >= 1 && fødeMåned <= 12) {
+                isRunning = false;
+            }
+        }
+        return fødeMåned;
+    }
+
+    private int inputFødselsDag(int fødeÅr, int fødeMåned) {
+        boolean isRunning = true;
+        int fødeDag = 1;
+        int dageIFødselsMåned = LocalDate.of(fødeÅr, fødeMåned, fødeDag).lengthOfMonth();
+        int nuværrendeÅr = LocalDate.now().getYear();
+        int nuværrendeMåned = LocalDate.now().getMonthValue();
+        int nuværrendeDagImåneden = LocalDate.now().getDayOfMonth();
+        while (isRunning) {
+            ui.askForMedlemInfo("dag i måneden de blev født");
+            ui.typeHere();
+            fødeDag = ui.getIntInput();
+            if (fødeÅr == nuværrendeÅr && fødeMåned == nuværrendeMåned) {
+                if (fødeDag >= 1 && fødeDag <= nuværrendeDagImåneden) {
+                    isRunning = false;
+                }
+            } else if (fødeDag >= 1 && fødeDag <= dageIFødselsMåned) {
+                isRunning = false;
+            }
+        }
+        return fødeDag;
+    }
+
 
 
 
