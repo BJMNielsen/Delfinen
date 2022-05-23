@@ -4,11 +4,13 @@ import model.KonkurrenceSvømmer;
 import model.Medlem;
 
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Scanner;
 
 public class UI {
     private final Scanner stringInput = new Scanner(System.in);
     private final Scanner intInput = new Scanner(System.in);
+    private final Scanner booleanInput = new Scanner(System.in);
 
 
         //General UI
@@ -25,6 +27,15 @@ public class UI {
         public String getStringInput() {
             return stringInput.nextLine();
         }
+        public boolean getBooleanInput() {
+            try{
+                return booleanInput.nextBoolean();
+            } catch (Exception e){
+                System.out.println("Invalid input. Du skal skrive true eller false.");
+                booleanInput.nextLine();
+                return getBooleanInput();
+            }
+        }
 
     //General UI
     public void inputIsInvalid(int helTal){
@@ -38,6 +49,25 @@ public class UI {
 
     public void inputIsInvalid(double kommaTal){
         System.out.println("dit input '" + kommaTal + "' er invalid.");
+    }
+
+
+    public boolean askUserYesOrNo(){
+           // boolean isRunning = true;
+            while(true) {
+                System.out.print("Indtast ja eller nej ");
+                String userAnswer = getStringInput().toLowerCase(Locale.ROOT);
+                switch (userAnswer){
+                    case "ja":
+                        return true;
+
+                    case "nej":
+                        return false;
+
+                    default:
+                        System.out.println("Du indtastede ikke et ja eller nej");
+                }
+            }
     }
 
     public void typeHere(){
@@ -141,6 +171,9 @@ public class UI {
             System.out.println("Nr. " + medlemsnummer + " " + navn + " " + fødselsdato + " " + aktivitet + ", balance: " + kontingentBalance + " kr.");
         }
         System.out.println('\n');
+    }
+    public void askForMedlemInfo(String tekst){
+        System.out.println("Hvad er medlemmmets " + tekst + "?");
     }
 
 
@@ -339,5 +372,6 @@ public class UI {
         }
         System.out.println('\n');
     }
+
 }
 

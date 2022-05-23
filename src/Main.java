@@ -49,10 +49,8 @@ public class Main {
          Medlem m2 = new Medlem( "Lars", LocalDate.parse("1995-09-09"), false, 0);
          Medlem m3 = new Medlem( "Norman", LocalDate.parse("2009-03-25"), false, 0);
          Medlem m4 = new Medlem( "Helle", LocalDate.parse("1993-04-15"), true, 0);
-         Svømmedisciplin s1 = new Svømmedisciplin(true, Disciplin.BUTTERFLY, 100.25,LocalDate.parse("2007-12-03"));
 
-         Medlem m5 = new KonkurrenceSvømmer(m4, 1, s1);
-         medlemsliste.addAll(Arrays.asList(m1, m2, m3, m5));
+         medlemsliste.addAll(Arrays.asList(m1, m2, m3, m4));
          return medlemsliste;
      }
 

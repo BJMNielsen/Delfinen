@@ -63,6 +63,17 @@ public abstract class Ansat {
     return medlemsListen;
   }
 
+  public Medlem getEtMedlem(int medlemsnummer) {
+    for (Medlem etMedlem : medlemsListen) {
+      int etMedlemsNummer = etMedlem.getMedlemsnummer();
+      if (medlemsnummer == etMedlemsNummer) {
+        return etMedlem; // succes at finde medlem
+      }
+
+    }
+    return null; //fejlet at finde et medlem
+  }
+
   public void seMedlemsListe() {
 
   }

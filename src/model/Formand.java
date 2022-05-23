@@ -17,7 +17,7 @@ public class Formand extends Ansat{
 
 
   public Medlem indmeldMedlem(String navn, LocalDate fødselsdato, boolean erAktiv, boolean erKonkurrencesvømmer, int kontingentBalance) {
-    Medlem etMedlem = new Medlem(navn, fødselsdato, erAktiv,erKonkurrencesvømmer, kontingentBalance);
+    Medlem etMedlem = new Medlem(navn, fødselsdato, erAktiv, kontingentBalance);
 
     if(erKonkurrencesvømmer){
       return etMedlem;
@@ -42,18 +42,18 @@ public class Formand extends Ansat{
 
 
 
-  public void indmeldKonkurrencesvømmer(Medlem etMedlem, int trænerID, Svømmedisciplin discipliner) {
-    KonkurrenceSvømmer enKonkurrencesvømmer = new KonkurrenceSvømmer(etMedlem, trænerID, discipliner);
+  public void indmeldKonkurrencesvømmer(Medlem etMedlem, int trænerID, Svømmedisciplin butterfly, Svømmedisciplin crawl, Svømmedisciplin rygcrawl, Svømmedisciplin brystsvømning) {
+    KonkurrenceSvømmer enKonkurrencesvømmer = new KonkurrenceSvømmer(etMedlem, trænerID, butterfly, crawl, rygcrawl, brystsvømning);
     addKonkurrencesvømmer(enKonkurrencesvømmer);
   }
 
-  public boolean opgraderTilKonkurrencesvømmer(int medlemsnummer, int trænerID, Svømmedisciplin discipliner) {
+  public boolean opgraderTilKonkurrencesvømmer(int medlemsnummer, int trænerID, Svømmedisciplin butterfly, Svømmedisciplin crawl, Svømmedisciplin rygcrawl, Svømmedisciplin brystsvømning) {
     ArrayList<Medlem> medlemsListe = getMedlemsListen();
     for (Medlem etMedlem : medlemsListe) {
      int aktuelleMedlemsnummer = etMedlem.getMedlemsnummer();
      if (medlemsnummer == aktuelleMedlemsnummer) {
        removeMember(etMedlem);
-       KonkurrenceSvømmer enKonkurrenceSvømmer = new KonkurrenceSvømmer(etMedlem, trænerID, discipliner);
+       KonkurrenceSvømmer enKonkurrenceSvømmer = new KonkurrenceSvømmer(etMedlem, trænerID, butterfly, crawl, rygcrawl, brystsvømning);
        addKonkurrencesvømmer(enKonkurrenceSvømmer);
        return true;
      }

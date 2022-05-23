@@ -83,11 +83,11 @@ public class TrænerController {
         ui.printKonkurrenceSvømmer(konkurrenceSvømmerListe);
     }
     public void visJuniorHold(){
-       ArrayList<KonkurrenceSvømmer> juniourHold = enTræner.skafJuniorHold(konkurrenceSvømmere);
+       ArrayList<KonkurrenceSvømmer> juniourHold = enTræner.skafJuniorHold();
        ui.printJuniorHold(juniourHold);
     }
     public void visSeniorHold(){
-        ArrayList<KonkurrenceSvømmer> seniorHold = enTræner.skafSeniorHold(konkurrenceSvømmere);
+        ArrayList<KonkurrenceSvømmer> seniorHold = enTræner.skafSeniorHold();
         ui.printSeniorHold(seniorHold);
     }
     public void visCrawlOpdeling(){

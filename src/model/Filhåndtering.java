@@ -89,8 +89,11 @@ public class Filhåndtering {
 
     public KonkurrenceSvømmer createKonkurrenceSvømmer(Scanner input2, Medlem medlem) {
         int trænerID = input2.nextInt();
-        Svømmedisciplin svømmedisciplin = createSvømmedisciplin(input2);
-        return new KonkurrenceSvømmer(medlem, trænerID, svømmedisciplin);
+        Svømmedisciplin butterfly = createSvømmedisciplin(input2);
+        Svømmedisciplin crawl = createSvømmedisciplin(input2);
+        Svømmedisciplin rygcrawl = createSvømmedisciplin(input2);
+        Svømmedisciplin brystsvømning = createSvømmedisciplin(input2);
+        return new KonkurrenceSvømmer(medlem, trænerID, butterfly, crawl, rygcrawl, brystsvømning);
     }
 
     public Svømmedisciplin createSvømmedisciplin(Scanner input2) {

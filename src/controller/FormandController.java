@@ -6,15 +6,16 @@ import model.KonkurrenceSvømmer;
 import model.Medlem;
 import view.UI;
 
+import javax.xml.namespace.QName;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class FormandController {
 
     private ArrayList<Ansat> ansatListe;
     private Formand formanden;
     private UI ui;
-    private Medlem etMedlem;
-    private KonkurrenceSvømmer enKonkurrenceSvømmer;
     ArrayList<Medlem> medlemsliste = formanden.getMedlemsListen();
 
 
@@ -71,18 +72,51 @@ public class FormandController {
     }
 
     public void indmeldMedlem() {
-        formanden.indmeldMedlem(etMedlem.getNavn(),etMedlem.getFødselsdato(),etMedlem.getErAktiv(),etMedlem.isErKonkurrencesvømmer(), (int) etMedlem.getKontingentBalance());
+        ui.askForMedlemInfo("navn");
+        String navn = ui.getStringInput();
+        ui.askForMedlemInfo("Fødselsdato");
+        LocalDate fødselsdato = createDateFromIntInput();
+        ui.askForMedlemInfo("aktivitetsstatus");
+        boolean status = ui.askUserYesOrNo();
+        ui.askForMedlemInfo("konkurrencestatus");
+        boolean statusKonkurrence = ui.askUserYesOrNo();
+        ui.askForMedlemInfo("kontingentbalance");
+        int kontingent = ui.getIntInput();
+
+        Medlem etMedlem = formanden.indmeldMedlem(navn,fødselsdato,status,statusKonkurrence,kontingent);
+        if(etMedlem != null){
+            indmeldKonkurrenceSvømmer(etMedlem);
+        }
         ui.printMedlemsliste(medlemsliste);
     }
 
+    public void indmeldKonkurrenceSvømmer(Medlem etMedlem){
+
+
+    }
+
+    private LocalDate createDateFromIntInput() {
+        ui.askForMedlemInfo("fødselsår");
+        int år = ui.getIntInput();
+        ui.askForMedlemInfo("fødselsmåned");
+        int måned = ui.getIntInput();
+        ui.askForMedlemInfo("fødselsdag");
+        int dag = ui.getIntInput();
+        return LocalDate.of(år,måned,dag);
+    }
+
+
+
+
+
     public void fjernMedlem() {
-        formanden.fjernMedlem(etMedlem.getMedlemsnummer());
+        //formanden.fjernMedlem(medlemsliste);
         ui.printMedlemsliste(medlemsliste);
 
     }
 
     public void opgraderTilKonkurrenceSvømmer() {
-        formanden.opgraderTilKonkurrencesvømmer(enKonkurrenceSvømmer.getMedlemsnummer(),enKonkurrenceSvømmer.getTrænerID(),enKonkurrenceSvømmer.getSvømmedisciplin());
+        //formanden.opgraderTilKonkurrencesvømmer();
         ui.printMedlemsliste(medlemsliste);
     }
 }

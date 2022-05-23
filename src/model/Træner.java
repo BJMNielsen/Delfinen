@@ -22,9 +22,9 @@ public class Træner extends Ansat{
     this.trænerID=trænerID;
   }
   public Træner(){
-    super.setBrugerLogin("Træner" + trænerID);
     staticTrænerID++;
     trænerID = staticTrænerID;
+    super.setBrugerLogin("Træner" + trænerID);
   }
 
 
@@ -38,73 +38,55 @@ public class Træner extends Ansat{
     return konkurrenceSvømmerer;
   }
 
-  public ArrayList<KonkurrenceSvømmer> skafJuniorHold (ArrayList<KonkurrenceSvømmer> konkurrenceSvømmere) {
+  public ArrayList<KonkurrenceSvømmer> skafJuniorHold () {
+    ArrayList<KonkurrenceSvømmer> konkurrenceSvømmererListen = skafKonkurrenceSvømmerer();
     ArrayList<KonkurrenceSvømmer> juniorKonkurrenceSvømmere = new ArrayList<>();
-    for (int i = 0; i < konkurrenceSvømmere.size(); i++) {
-      if (java.time.LocalDate.now().getYear() - konkurrenceSvømmere.get(i).getFødselsdato().getYear() < 18) {
-        juniorKonkurrenceSvømmere.add(konkurrenceSvømmere.get(i));
+    for(KonkurrenceSvømmer enSvømmer : konkurrenceSvømmererListen) {
+      if (enSvømmer.udregnAlder() < 18) {
+        juniorKonkurrenceSvømmere.add(enSvømmer);
       }
     }
     return juniorKonkurrenceSvømmere;
   }
 
-  public ArrayList<KonkurrenceSvømmer> skafSeniorHold (ArrayList<KonkurrenceSvømmer> konkurrenceSvømmers) {
+  public ArrayList<KonkurrenceSvømmer> skafSeniorHold () {
+    ArrayList<KonkurrenceSvømmer> konkurrenceSvømmererListen = skafKonkurrenceSvømmerer();
     ArrayList<KonkurrenceSvømmer> seniorKonkurrenceSvømmere = new ArrayList<>();
-    for (int i = 0; i < konkurrenceSvømmers.size(); i++) {
-      if(java.time.LocalDate.now().getYear() - konkurrenceSvømmers.get(i).getFødselsdato().getYear() > 18 && java.time.LocalDate.now().getYear()  - konkurrenceSvømmers.get(i).getFødselsdato().getYear() < 60){
-        seniorKonkurrenceSvømmere.add(konkurrenceSvømmers.get(i));
+
+    for(KonkurrenceSvømmer enSvømmer : konkurrenceSvømmererListen) {
+      if (enSvømmer.udregnAlder() >= 18) {
+        seniorKonkurrenceSvømmere.add(enSvømmer);
       }
     }
     return seniorKonkurrenceSvømmere;
   }
 
   public ArrayList<KonkurrenceSvømmer> crawlOpdeling(ArrayList<KonkurrenceSvømmer> arrayTilSortering) {
-    ArrayList<KonkurrenceSvømmer> disciplinOpdeltListeCrawl = new ArrayList<>();
-    for (KonkurrenceSvømmer konkurrencesvømmer : arrayTilSortering) {
-      Svømmedisciplin svømmedisciplin = konkurrencesvømmer.getSvømmedisciplin();
-      if (svømmedisciplin.isErAktiv())
-        if (svømmedisciplin.getDisciplin() == Disciplin.CRAWL) {
-          disciplinOpdeltListeCrawl.add(konkurrencesvømmer);
-        }
-    }
-    return disciplinOpdeltListeCrawl;
+    SorterKonkurrenceSvømmer sorterListe = new SorterKonkurrenceSvømmer();
+    Disciplin crawl = Disciplin.CRAWL;
+    return sorterListe.efterDisciplin(arrayTilSortering, crawl);
   }
 
   public ArrayList<KonkurrenceSvømmer> rygCrawlOpdeling(ArrayList<KonkurrenceSvømmer> arrayTilSortering) {
-    ArrayList<KonkurrenceSvømmer> disciplinOpdeltListeRygCrawl = new ArrayList<>();
-    for (KonkurrenceSvømmer konkurrencesvømmer : arrayTilSortering) {
-      Svømmedisciplin svømmedisciplin = konkurrencesvømmer.getSvømmedisciplin();
-      if (svømmedisciplin.isErAktiv())
-        if (svømmedisciplin.getDisciplin() == Disciplin.RYGCRAWL) {
-          disciplinOpdeltListeRygCrawl.add(konkurrencesvømmer);
-        }
-    } return disciplinOpdeltListeRygCrawl;
+    SorterKonkurrenceSvømmer sorterListe = new SorterKonkurrenceSvømmer();
+    Disciplin rygcrawl = Disciplin.RYGCRAWL;
+    return sorterListe.efterDisciplin(arrayTilSortering, rygcrawl);
   }
 
   public ArrayList<KonkurrenceSvømmer> brystSvømningOpdeling(ArrayList<KonkurrenceSvømmer> arrayTilSortering) {
-    ArrayList<KonkurrenceSvømmer> disciplinOpdeltListeBrystSvømning = new ArrayList<>();
-    for (KonkurrenceSvømmer konkurrencesvømmer : arrayTilSortering) {
-      Svømmedisciplin svømmedisciplin = konkurrencesvømmer.getSvømmedisciplin();
-      if (svømmedisciplin.isErAktiv())
-        if (svømmedisciplin.getDisciplin() == Disciplin.BRYSTSVØMNING) {
-          disciplinOpdeltListeBrystSvømning.add(konkurrencesvømmer);
-        }
-    } return disciplinOpdeltListeBrystSvømning;
+    SorterKonkurrenceSvømmer sorterListe = new SorterKonkurrenceSvømmer();
+    Disciplin brystsvømning = Disciplin.BRYSTSVØMNING;
+    return sorterListe.efterDisciplin(arrayTilSortering, brystsvømning);
   }
 
   public ArrayList<KonkurrenceSvømmer> butterflyOpdeling(ArrayList<KonkurrenceSvømmer> arrayTilSortering) {
-    ArrayList<KonkurrenceSvømmer> disciplinOpdeltListeButterfly = new ArrayList<>();
-    for (KonkurrenceSvømmer konkurrencesvømmer : arrayTilSortering) {
-      Svømmedisciplin svømmedisciplin = konkurrencesvømmer.getSvømmedisciplin();
-      if (svømmedisciplin.isErAktiv())
-        if (svømmedisciplin.getDisciplin() == Disciplin.BUTTERFLY) {
-          disciplinOpdeltListeButterfly.add(konkurrencesvømmer);
-        }
-    } return disciplinOpdeltListeButterfly;
+    SorterKonkurrenceSvømmer sorterListe = new SorterKonkurrenceSvømmer();
+    Disciplin butterfly = Disciplin.BUTTERFLY;
+    return sorterListe.efterDisciplin(arrayTilSortering, butterfly);
   }
 
   public ArrayList<KonkurrenceSvømmer> top5KonkurrenceSvømmerer(ArrayList<KonkurrenceSvømmer> disciplinListe){
-    Collections.sort(disciplinListe);
+
     ArrayList<KonkurrenceSvømmer> top5 = new ArrayList<>();
     for (int i = 0; i < 4; i++) {
       top5.add(disciplinListe.get(i));
