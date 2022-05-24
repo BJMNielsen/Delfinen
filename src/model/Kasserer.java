@@ -1,6 +1,5 @@
 package model;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Kasserer extends Ansat{
@@ -18,7 +17,6 @@ public class Kasserer extends Ansat{
   }
 
   public double beregnKontingentForEtMedlem (Medlem etMedlem) {
-
     if (etMedlem.getErAktiv()) {
       if(etMedlem.udregnAlder() < 18){
         kontingent = 1000;

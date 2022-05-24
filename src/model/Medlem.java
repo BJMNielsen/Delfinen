@@ -45,8 +45,6 @@ public class Medlem {
 
   // Getters & Setters
 
-
-
   public int getMedlemsnummer() {
     return medlemsnummer;
   }

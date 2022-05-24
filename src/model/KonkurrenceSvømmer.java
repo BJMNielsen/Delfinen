@@ -44,12 +44,4 @@ public class KonkurrenceSvømmer extends Medlem {
     return trænerID;
   }
 
-  /*
-  @Override
-  public int compareTo(KonkurrenceSvømmer svømmer) {
-    return Double.compare(this.svømmedisciplin.getBedsteTræningsTidISek(), svømmer.svømmedisciplin.getBedsteTræningsTidISek());
-  }
-
-   */
-
 }
