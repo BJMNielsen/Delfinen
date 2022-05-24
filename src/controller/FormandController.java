@@ -96,7 +96,7 @@ public class FormandController {
     }
 
     public int indtastTrænerNummer() {
-        ui.askForMedlemInfo("den tilknyttede træners ID");
+        ui.askForMedlemInfo("tilknyttede træners ID");
         int trænerNummer = 0;
         boolean isRunning = true;
         while (isRunning) {
@@ -121,13 +121,15 @@ public class FormandController {
     public Svømmedisciplin indtastSvømmedisciplin(Disciplin disciplin) {
         ui.askForMedlemInfo("aktivitetsstatus i " + disciplin);
         boolean disciplinStatus = ui.askUserYesOrNo();
-        ui.askForMedlemInfo("bedste tid i sekunder, hvis de har en");
+        System.out.println("Har medlemmet en bedste tid?");
         boolean harEnBedsteTid = ui.askUserYesOrNo();
         if (harEnBedsteTid) {
-            double bedsteTidInput;
-            do {
+            ui.askForMedlemInfo("bedste tid i sekunder");
+            double bedsteTidInput = ui.getDoubleInput();
+            while (bedsteTidInput <= 0) {
+                ui.askForMedlemInfo("bedste tid i sekunder");
                 bedsteTidInput = ui.getDoubleInput();
-            } while (bedsteTidInput <= 0);
+            }
             ui.askForMedlemInfo("dato for deres bedste tid");
             LocalDate datoForBedsteTid = createDateFromIntInput("år for den bedste tid", "måned for den bedste tid", "dag for den bedste tid");
             return new Svømmedisciplin(disciplinStatus, disciplin, bedsteTidInput, datoForBedsteTid);
@@ -203,18 +205,44 @@ public class FormandController {
     }
 
 
-
-
-
-
     public void fjernMedlem() {
-        //formanden.fjernMedlem(medlemsliste);
-        ui.printMedlemsliste(medlemsliste);
+        boolean isRunning = true;
+        while(isRunning){
+            System.out.println("Indtast medlemsnummer på det medlem der skal fjernes:");
+            int input = ui.getIntInput();
+            boolean medlemBlevFjernet = formanden.fjernMedlem(input);
 
+            if(medlemBlevFjernet){
+                System.out.println("Medlemmet blev fjernet.");
+                isRunning = false;
+            }else{
+                System.out.println("Medlemmet findes ikke.");
+            }
+        }
     }
 
     public void opgraderTilKonkurrenceSvømmer() {
-        //formanden.opgraderTilKonkurrencesvømmer();
-        ui.printMedlemsliste(medlemsliste);
+        boolean isRunning = true;
+        int medlemsnummer = 0;
+        Medlem etMedlem = null;
+        while(isRunning){
+            System.out.println("Hvad er medlemmets nummer?");
+            medlemsnummer = ui.getIntInput();
+            etMedlem = formanden.getEtMedlem(medlemsnummer);
+            if(etMedlem != null){
+                isRunning = false;
+            } else {
+                System.out.println("Medlem nr. " + medlemsnummer + " findes ikke.");
+            }
+        }
+        int træner = indtastTrænerNummer();
+        Svømmedisciplin butterfly = indtastSvømmedisciplin(Disciplin.BUTTERFLY);
+        Svømmedisciplin crawl = indtastSvømmedisciplin(Disciplin.CRAWL);
+        Svømmedisciplin rygcrawl = indtastSvømmedisciplin(Disciplin.RYGCRAWL);
+        Svømmedisciplin brystsvømning = indtastSvømmedisciplin(Disciplin.BRYSTSVØMNING);
+        boolean erOpgraderet = formanden.opgraderTilKonkurrencesvømmer(medlemsnummer,træner,butterfly,crawl,rygcrawl,brystsvømning);
+        if(erOpgraderet){
+            System.out.println("Medlem opgraderet.");
+        }
     }
 }

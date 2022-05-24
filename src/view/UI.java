@@ -169,7 +169,7 @@ public class UI {
                 1) Vis medlemsliste
                 2) Opret medlem
                 3) Fjern medlem
-                4) Opgrader medlem til konkurrencesvømmer TODO lav metode metode
+                4) Opgrader medlem til konkurrencesvømmer
                 0) Log ud
                 
                 """);

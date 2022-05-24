@@ -62,4 +62,8 @@ public class KassererController {
         ui.printMedlemsliste(medlemsliste);
     }
 
+    public void seRestanceMedlemmer(){
+        seRestanceMedlemmer();
+    }
+
 }

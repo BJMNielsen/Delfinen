@@ -43,8 +43,7 @@ public class Formand extends Ansat{
      int aktuelleMedlemsnummer = etMedlem.getMedlemsnummer();
      if (medlemsnummer == aktuelleMedlemsnummer) {
        removeMember(etMedlem);
-       KonkurrenceSvømmer enKonkurrenceSvømmer = new KonkurrenceSvømmer(etMedlem, trænerID, butterfly, crawl, rygcrawl, brystsvømning);
-       addKonkurrencesvømmer(enKonkurrenceSvømmer);
+       indmeldKonkurrencesvømmer(etMedlem,trænerID, butterfly, crawl, rygcrawl, brystsvømning);
        return true;
      }
     }
