@@ -1,9 +1,7 @@
 package controller;
 
-import enums.Disciplin;
 import model.Ansat;
 import model.KonkurrenceSvømmer;
-import model.Medlem;
 import model.Træner;
 import view.UI;
 
@@ -46,24 +44,6 @@ public class TrænerController {
                 return true;
             case 3:
                 visTop5();
-                return true;
-            case 4:
-
-                return true;
-            case 5:
-
-                return true;
-            case 6:
-
-                return true;
-            case 7:
-
-                return true;
-            case 8:
-
-                return true;
-            case 9:
-
                 return true;
             case 0:
                 ui.exitProgramMessage();

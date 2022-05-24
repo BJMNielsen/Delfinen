@@ -24,13 +24,6 @@ public class KassererController {
         boolean isRunning = true;
         ui.ansatMenuWelcomeMessage(kassereren.getBrugerLogin());
         while (isRunning) {
-//            Menu Kasserer
-//
-//            1) Vis medlemsliste
-//            2) Vis medlemmer i restance
-//            3) Vis forventede kontingent indbetaling for året
-//            0) Log ud
-
             ui.kassererMenu();
             isRunning = userChoice();
         }
@@ -44,10 +37,13 @@ public class KassererController {
             case 1:
                 visMedlemslisten();
                 return true;
-
+            case 2:
+                seRestanceMedlemmer();
+                return true;
+            case 3:
+                visKontingentForAlleMedlemmer();
+                return true;
             case 0:
-
-
                 return false;
 
             default:
@@ -63,7 +59,12 @@ public class KassererController {
     }
 
     public void seRestanceMedlemmer(){
-        seRestanceMedlemmer();
+        kassereren.seRestanceMedlemmer();
+    }
+    public void visKontingentForAlleMedlemmer(){
+        double result = kassereren.beregnKontingentForAlleMedlemmer();
+        System.out.println(result + ".kr");
+
     }
 
 }

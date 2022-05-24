@@ -242,7 +242,7 @@ public class FormandController {
         Svømmedisciplin brystsvømning = indtastSvømmedisciplin(Disciplin.BRYSTSVØMNING);
         boolean erOpgraderet = formanden.opgraderTilKonkurrencesvømmer(medlemsnummer,træner,butterfly,crawl,rygcrawl,brystsvømning);
         if(erOpgraderet){
-            System.out.println("Medlem opgraderet.");
+            System.out.println("Medlem opgraderet.\n");
         }
     }
 }

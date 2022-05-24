@@ -1,11 +1,8 @@
 package model;
 
-import java.util.ArrayList;
-
 public class Kasserer extends Ansat{
   double result;
   double kontingent;
-  ArrayList<Medlem> medlemsListen = new ArrayList<>();
 
 
   public Kasserer(String brugerLogin, String password) {
@@ -34,17 +31,16 @@ public class Kasserer extends Ansat{
   }
 
   public double beregnKontingentForAlleMedlemmer() {
-    ArrayList<Medlem> medlemsliste = getMedlemsListen();
-    for (int i = 0; i < medlemsliste.size(); i++) {
-      result += beregnKontingentForEtMedlem(medlemsliste.get(i));
+    for (int i = 0; i < getMedlemsListen().size(); i++) {
+      result += beregnKontingentForEtMedlem(getMedlemsListen().get(i));
     }
     return result;
   }
 
   public void seRestanceMedlemmer() {
-    for (int i = 0; i < medlemsListen.size(); i++) {
-      if(medlemsListen.get(i).getKontingentBalance() < 0){
-        System.out.println(medlemsListen.get(i));
+    for (int i = 0; i < getMedlemsListen().size(); i++) {
+      if(getMedlemsListen().get(i).getKontingentBalance() < 0){
+        System.out.println(getMedlemsListen().get(i));
       }
     }
   }
