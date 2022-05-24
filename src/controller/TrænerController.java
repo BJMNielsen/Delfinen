@@ -1,5 +1,6 @@
 package controller;
 
+import enums.Disciplin;
 import model.Ansat;
 import model.KonkurrenceSvømmer;
 import model.Medlem;
@@ -44,25 +45,25 @@ public class TrænerController {
                 visKonkurrenceSvømmere();
                 return true;
             case 3:
-                visJuniorHold();
+                visTop5();
                 return true;
             case 4:
-                visSeniorHold();
+
                 return true;
             case 5:
-                visCrawlOpdeling();
+
                 return true;
             case 6:
-                visRygCrawlOpdeling();
+
                 return true;
             case 7:
-                visBrystSvømningOpdeling();
+
                 return true;
             case 8:
-                visButterflyOpdeling();
+
                 return true;
             case 9:
-                visTop5KonkurrenceSvømmerer();
+
                 return true;
             case 0:
                 ui.exitProgramMessage();
@@ -74,6 +75,52 @@ public class TrænerController {
     }
 
 
+
+    public void visTop5() {
+        ArrayList<KonkurrenceSvømmer> juniorHoldet = enTræner.skafJuniorHold();
+        ArrayList<KonkurrenceSvømmer> seniorHoldet = enTræner.skafSeniorHold();
+        String disciplin = "";
+        boolean isRunning = true;
+        while (isRunning) {
+            ui.vælgDisciplinMenu();
+
+            int userInput = ui.getIntInput();
+            switch (userInput) {
+                case 1:
+                    juniorHoldet = enTræner.butterflyOpdeling(juniorHoldet);
+                    seniorHoldet = enTræner.butterflyOpdeling(seniorHoldet);
+                    disciplin = "butterfly";
+                    isRunning = false;
+                    break;
+                case 2:
+                    juniorHoldet = enTræner.crawlOpdeling(juniorHoldet);
+                    seniorHoldet = enTræner.crawlOpdeling(seniorHoldet);
+                    disciplin = "crawl";
+                    isRunning = false;
+                    break;
+                case 3:
+                    juniorHoldet = enTræner.rygCrawlOpdeling(juniorHoldet);
+                    seniorHoldet = enTræner.rygCrawlOpdeling(seniorHoldet);
+                    disciplin = "rygcrawl";
+                    isRunning = false;
+                    break;
+                case 4:
+                    juniorHoldet = enTræner.brystSvømningOpdeling(juniorHoldet);
+                    seniorHoldet = enTræner.brystSvømningOpdeling(seniorHoldet);
+                    disciplin = "brystsvømning";
+                    isRunning = false;
+                    break;
+                default:
+                    ui.inputIsInvalid(userInput);
+            }
+        }
+        ui.printTop5Listen(juniorHoldet, "juniorholdet", disciplin);
+        ui.printTop5Listen(seniorHoldet, "seniorholdet", disciplin);
+    }
+
+
+
+
     public void visMedlemslisten() {
         ArrayList<KonkurrenceSvømmer> medlemsliste = enTræner.skafKonkurrenceSvømmerer();
         ui.printKonkurrenceSvømmerListe(medlemsliste);
@@ -82,6 +129,8 @@ public class TrænerController {
         ArrayList<KonkurrenceSvømmer> konkurrenceSvømmerListe = enTræner.skafKonkurrenceSvømmerer();
         ui.printKonkurrenceSvømmer(konkurrenceSvømmerListe);
     }
+
+    /*
     public void visJuniorHold(){
        ArrayList<KonkurrenceSvømmer> juniourHold = enTræner.skafJuniorHold();
        ui.printJuniorHold(juniourHold);
@@ -110,4 +159,6 @@ public class TrænerController {
         ArrayList<KonkurrenceSvømmer> top5 = enTræner.top5KonkurrenceSvømmerer(konkurrenceSvømmere);
         ui.printTop5(top5);
     }
+
+     */
 }

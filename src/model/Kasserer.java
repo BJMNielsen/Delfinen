@@ -20,10 +20,10 @@ public class Kasserer extends Ansat{
   public double beregnKontingentForEtMedlem (Medlem etMedlem) {
 
     if (etMedlem.getErAktiv()) {
-      if(java.time.LocalDate.now().getYear() - etMedlem.getFødselsdato().getYear() < 18){
+      if(etMedlem.udregnAlder() < 18){
         kontingent = 1000;
       }
-      else if(java.time.LocalDate.now().getYear() - etMedlem.getFødselsdato().getYear() > 18 && java.time.LocalDate.now().getYear()  - etMedlem.getFødselsdato().getYear() < 60){
+      else if(java.time.LocalDate.now().getYear() - etMedlem.getFødselsdato().getYear() >= 18 && java.time.LocalDate.now().getYear()  - etMedlem.getFødselsdato().getYear() < 60){
         kontingent = 1600;
       } else {
         kontingent = 1200;
@@ -36,8 +36,9 @@ public class Kasserer extends Ansat{
   }
 
   public double beregnKontingentForAlleMedlemmer() {
-    for (int i = 0; i < medlemsListen.size(); i++) {
-      result = result + medlemsListen.get(i).getKontingentBalance();
+    ArrayList<Medlem> medlemsliste = getMedlemsListen();
+    for (int i = 0; i < medlemsliste.size(); i++) {
+      result += beregnKontingentForEtMedlem(medlemsliste.get(i));
     }
     return result;
   }

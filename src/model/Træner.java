@@ -125,6 +125,10 @@ public class Træner extends Ansat{
     // For de svømmere, der har deltaget i konkurrencer, registreres stævne, placering og tid.
   }
 
+  public int getTrænerID() {
+    return trænerID;
+  }
+
   public static void setStaticTrænerID(int staticTrænerID) {
     Træner.staticTrænerID = staticTrænerID;
   }

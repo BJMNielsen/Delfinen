@@ -16,6 +16,11 @@ public class Main {
     }
 
     public void go() throws FileNotFoundException {
+
+      //System.out.println(ArraylistMedlemmer());
+      //System.out.println(ArraylistAnsatte());
+
+
         SystemController delfinKlubben = new SystemController();
         delfinKlubben.start();
     }

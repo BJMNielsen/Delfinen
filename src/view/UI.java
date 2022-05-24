@@ -1,7 +1,9 @@
 package view;
 
+import enums.Disciplin;
 import model.KonkurrenceSvømmer;
 import model.Medlem;
+import model.Svømmedisciplin;
 
 import java.util.ArrayList;
 import java.util.Locale;
@@ -10,6 +12,7 @@ import java.util.Scanner;
 public class UI {
     private final Scanner stringInput = new Scanner(System.in);
     private final Scanner intInput = new Scanner(System.in);
+    private final Scanner doubleInput = new Scanner(System.in);
     private final Scanner booleanInput = new Scanner(System.in);
 
 
@@ -21,6 +24,16 @@ public class UI {
                 System.out.println("Invalid input");
                 intInput.nextLine();
                 return getIntInput();
+            }
+        }
+
+        public double getDoubleInput() {
+            try {
+                return doubleInput.nextDouble();
+            } catch (Exception e) {
+                System.out.println("Invalid input");
+                doubleInput.nextLine();
+                return getDoubleInput();
             }
         }
 
@@ -49,6 +62,10 @@ public class UI {
 
     public void inputIsInvalid(double kommaTal){
         System.out.println("dit input '" + kommaTal + "' er invalid.");
+    }
+
+    public void detVarForketInput(String forkert) {
+        System.out.println("Der var ingen " + forkert + '.');
     }
 
 
@@ -204,6 +221,24 @@ public class UI {
                 """);
     }
 
+    public void vælgDisciplinMenu() {
+        System.out.println("""
+            1) Sorter efter de 5 bedste i BUTTERFLY.
+            2) Sorter efter de 5 bedste i CRAWL.
+            3) Sorter efter de 5 bedste i RYGCRAWL.
+            4) Sorter efter de 5 bedste i BRYSTSVØMNING.""");
+    }
+
+
+
+    public void printTop5Listen(ArrayList<KonkurrenceSvømmer> konkurrenceSvømmererSorteretEfterDisciplin, String hold, String disciplin) {
+        System.out.println("TOP 5 LISTEN - " + hold.toUpperCase() + " - " + disciplin.toUpperCase() + '\n');
+        for (int i = 0; i < 4; i++) {
+            System.out.println(konkurrenceSvømmererSorteretEfterDisciplin.get(i));
+        }
+        System.out.println();
+    }
+
 
     public void printKonkurrenceSvømmer(ArrayList<KonkurrenceSvømmer> konkurrenceSvømmerListe) {
         System.out.println("KONKURRENCESVØMMERLISTE:\n");
@@ -215,10 +250,10 @@ public class UI {
             double kontingentBalance = enKonkurrenceSvømmer.getKontingentBalance();
             
             int trænerID = enKonkurrenceSvømmer.getTrænerID();
-            String disciplinAktiv = enKonkurrenceSvømmer.getSvømmedisciplin().getErAktivSomTekst();
-            String disciplin = String.valueOf(enKonkurrenceSvømmer.getSvømmedisciplin().getDisciplin());
-            double bedsteTræningsTid = enKonkurrenceSvømmer.getSvømmedisciplin().getBedsteTræningsTidISek();
-            String datoForBedsteTid = enKonkurrenceSvømmer.getSvømmedisciplin().getDatoForBedsteTidFormateret();
+            String disciplinAktiv = enKonkurrenceSvømmer.getRygcrawl().getErAktivSomTekst();
+            String disciplin = String.valueOf(enKonkurrenceSvømmer.getRygcrawl().getDisciplin());
+            double bedsteTræningsTid = enKonkurrenceSvømmer.getRygcrawl().getBedsteTræningsTidISek();
+            String datoForBedsteTid = enKonkurrenceSvømmer.getRygcrawl().getDatoForBedsteTidFormateret();
             
             
             System.out.println("Nr. " + medlemsnummer + " " + navn + " " + fødselsdato + " " + aktivitet + ", balance: " + kontingentBalance + " kr." 
@@ -227,7 +262,7 @@ public class UI {
         System.out.println('\n');
     }
 
-
+/*
     public void printJuniorHold(ArrayList<KonkurrenceSvømmer> juniorHoldListe) {
         System.out.println("JUNIORHOLDLISTE:\n");
         for (KonkurrenceSvømmer enKonkurrenceSvømmer: juniorHoldListe) {
@@ -386,6 +421,8 @@ public class UI {
         }
         System.out.println('\n');
     }
+
+ */
 
 }
 
