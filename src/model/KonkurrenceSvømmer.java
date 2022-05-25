@@ -1,6 +1,8 @@
 package model;
 
 
+import enums.Disciplin;
+
 public class KonkurrenceSvømmer extends Medlem {
   private int trænerID;
   private Svømmedisciplin butterfly,crawl,rygcrawl,brystsvømning;
@@ -31,7 +33,21 @@ public class KonkurrenceSvømmer extends Medlem {
   public Svømmedisciplin getBrystsvømning() {
     return brystsvømning;
   }
-
+  public Svømmedisciplin getSvømmedisciplin(Disciplin disciplin) {
+    if(disciplin == Disciplin.BUTTERFLY){
+      return butterfly;
+    }
+    if(disciplin == Disciplin.CRAWL){
+      return crawl;
+    }
+    if(disciplin == Disciplin.BRYSTSVØMNING){
+      return brystsvømning;
+    }
+    if(disciplin == Disciplin.RYGCRAWL){
+      return rygcrawl;
+    }
+    else return null;
+  }
   @Override
   public String toString() {
     return getNavn() + ';' + getFødselsdato().getYear() + ';' +

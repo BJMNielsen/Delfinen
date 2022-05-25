@@ -3,7 +3,6 @@ package model;
 import enums.Disciplin;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 public class Træner extends Ansat{
 
@@ -91,24 +90,8 @@ public class Træner extends Ansat{
 
 
   public ArrayList<KonkurrenceSvømmer> fjerneKonkurrencesvømmerMedManglendeTider(ArrayList<KonkurrenceSvømmer> listeDerSorteres, Disciplin disciplin) {
-   for(KonkurrenceSvømmer enKonkurrenceSvømmer : listeDerSorteres){
-     double bedsteTidISek = 0;
-     if (enKonkurrenceSvømmer.getButterfly().getDisciplin() == disciplin) {
-       bedsteTidISek = enKonkurrenceSvømmer.getButterfly().getBedsteTræningsTidISek();
-     }
-     if (enKonkurrenceSvømmer.getCrawl().getDisciplin() == disciplin) {
-       bedsteTidISek = enKonkurrenceSvømmer.getCrawl().getBedsteTræningsTidISek();
-     }
-     if (enKonkurrenceSvømmer.getRygcrawl().getDisciplin() == disciplin) {
-       bedsteTidISek = enKonkurrenceSvømmer.getRygcrawl().getBedsteTræningsTidISek();
-     }
-     if (enKonkurrenceSvømmer.getBrystsvømning().getDisciplin() == disciplin) {
-       bedsteTidISek = enKonkurrenceSvømmer.getBrystsvømning().getBedsteTræningsTidISek();
-     }
-     if (bedsteTidISek == 0) {
-       listeDerSorteres.remove(enKonkurrenceSvømmer);
-     }
-   }
+    listeDerSorteres.removeIf(enSvømmer -> (enSvømmer.getSvømmedisciplin(disciplin).getBedsteTræningsTidISek() == 0));
+
     return listeDerSorteres;
   }
 
