@@ -71,19 +71,19 @@ public class FormandController {
     public void indmeldMedlem() {
         ui.askForMedlemInfo("navn");
         String navn = ui.getStringInput();
-        ui.askForMedlemInfo("Fødselsdato");
         LocalDate fødselsdato = createDateFromIntInput("fødselsår", "fødselsmåned", "dag de blev født i måneden");
         ui.askForMedlemInfo("aktivitetsstatus");
-        boolean status = ui.askUserYesOrNo();
-        ui.askForMedlemInfo("konkurrencestatus");
-        boolean statusKonkurrence = ui.askUserYesOrNo();
+        boolean status = ui.askUserActiveOrInactive();
         ui.askForMedlemInfo("kontingentbalance");
         int kontingent = ui.getIntInput();
+        ui.askForMedlemInfo("konkurrencestatus");
+        boolean statusKonkurrence = ui.askUserActiveOrInactive();
 
         Medlem etMedlem = formanden.indmeldMedlem(navn,fødselsdato,status,statusKonkurrence,kontingent);
         if(etMedlem != null){
             indmeldKonkurrenceSvømmer(etMedlem);
         }
+        ui.detVarEnSuccess("oprette et medlem");
     }
 
     public void indmeldKonkurrenceSvømmer(Medlem etMedlem){
@@ -92,7 +92,13 @@ public class FormandController {
         Svømmedisciplin crawl = indtastSvømmedisciplin(Disciplin.CRAWL);
         Svømmedisciplin rygcrawl = indtastSvømmedisciplin(Disciplin.RYGCRAWL);
         Svømmedisciplin brystsvømning = indtastSvømmedisciplin(Disciplin.BRYSTSVØMNING);
-        formanden.indmeldKonkurrencesvømmer(etMedlem, trænerNummer, butterfly, crawl, rygcrawl, brystsvømning);
+        Konkurrence enKonkurrence = indtastKonkurrence();
+        if (enKonkurrence == null) {
+            formanden.indmeldKonkurrencesvømmer(etMedlem, trænerNummer, butterfly, crawl, rygcrawl, brystsvømning);
+        } else {
+            formanden.indmeldKonkurrencesvømmer(etMedlem, trænerNummer, butterfly, crawl, rygcrawl, brystsvømning, enKonkurrence);
+        }
+
     }
 
     public int indtastTrænerNummer() {
@@ -120,21 +126,50 @@ public class FormandController {
 
     public Svømmedisciplin indtastSvømmedisciplin(Disciplin disciplin) {
         ui.askForMedlemInfo("aktivitetsstatus i " + disciplin);
-        boolean disciplinStatus = ui.askUserYesOrNo();
+        boolean disciplinStatus = ui.askUserActiveOrInactive();
         System.out.println("Har medlemmet en bedste tid?");
         boolean harEnBedsteTid = ui.askUserYesOrNo();
         if (harEnBedsteTid) {
             ui.askForMedlemInfo("bedste tid i sekunder");
+            ui.typeHere();
             double bedsteTidInput = ui.getDoubleInput();
             while (bedsteTidInput <= 0) {
                 ui.askForMedlemInfo("bedste tid i sekunder");
+                ui.typeHere();
                 bedsteTidInput = ui.getDoubleInput();
             }
-            ui.askForMedlemInfo("dato for deres bedste tid");
-            LocalDate datoForBedsteTid = createDateFromIntInput("år for den bedste tid", "måned for den bedste tid", "dag for den bedste tid");
+            LocalDate datoForBedsteTid = createDateFromIntInput("år for deres bedste tid", "måned for deres bedste tid", "dag for deres bedste tid");
             return new Svømmedisciplin(disciplinStatus, disciplin, bedsteTidInput, datoForBedsteTid);
         }
         return new Svømmedisciplin(disciplinStatus, disciplin);
+    }
+
+    public Konkurrence indtastKonkurrence() {
+        ui.erSvømmerTilkyttetEnKonkurrence();
+        boolean harKonkurrence = ui.askUserYesOrNo();
+        if (harKonkurrence) {
+            ui.indtastStævneNavn();
+            ui.typeHere();
+            String stævneNavn = ui.getStringInput();
+            ui.indtastPlacering();
+            ui.typeHere();
+            int placering = ui.getIntInput();
+            while (placering <= 0) {
+                ui.inputIsInvalid(placering);
+                ui.typeHere();
+                placering = ui.getIntInput();
+            }
+            ui.indtastTidenForStævnet();
+            ui.typeHere();
+            double tid = ui.getDoubleInput();
+            while (tid <= 0) {
+                ui.inputIsInvalid(tid);
+                ui.typeHere();
+                tid = ui.getDoubleInput();
+            }
+            return new Konkurrence(stævneNavn, placering, tid);
+        }
+        return null;
     }
 
     private LocalDate createDateFromIntInput(String typeÅr, String typeMåned, String typeDag) {

@@ -93,7 +93,18 @@ public class Filhåndtering {
         Svømmedisciplin crawl = createSvømmedisciplin(input2);
         Svømmedisciplin rygcrawl = createSvømmedisciplin(input2);
         Svømmedisciplin brystsvømning = createSvømmedisciplin(input2);
+        if (input2.hasNext()) {
+            Konkurrence enKonkurrence = createKonkurrence(input2);
+            return new KonkurrenceSvømmer(medlem, trænerID, butterfly, crawl, rygcrawl, brystsvømning, enKonkurrence);
+        }
         return new KonkurrenceSvømmer(medlem, trænerID, butterfly, crawl, rygcrawl, brystsvømning);
+    }
+
+    public Konkurrence createKonkurrence(Scanner input2) {
+        String stævneNavn = input2.next();
+        int placering = input2.nextInt();
+        double tid = input2.nextDouble();
+        return new Konkurrence(stævneNavn, placering, tid);
     }
 
     public Svømmedisciplin createSvømmedisciplin(Scanner input2) {

@@ -90,9 +90,13 @@ public class Træner extends Ansat{
 
 
   public ArrayList<KonkurrenceSvømmer> fjerneKonkurrencesvømmerMedManglendeTider(ArrayList<KonkurrenceSvømmer> listeDerSorteres, Disciplin disciplin) {
-    listeDerSorteres.removeIf(enSvømmer -> (enSvømmer.getSvømmedisciplin(disciplin).getBedsteTræningsTidISek() == 0));
+    ArrayList<KonkurrenceSvømmer> konkurrencesvømmerListeMedBedsteTid = new ArrayList<>();
+    for (KonkurrenceSvømmer enKonkurrenceSvømmer : listeDerSorteres) {
+      konkurrencesvømmerListeMedBedsteTid.add(enKonkurrenceSvømmer);
+    }
+    konkurrencesvømmerListeMedBedsteTid.removeIf(enSvømmer -> (enSvømmer.getSvømmedisciplin(disciplin).getBedsteTræningsTidISek() == 0));
 
-    return listeDerSorteres;
+    return konkurrencesvømmerListeMedBedsteTid;
   }
 
 

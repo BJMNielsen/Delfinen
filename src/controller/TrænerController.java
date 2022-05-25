@@ -110,35 +110,4 @@ public class TrænerController {
         ui.printKonkurrenceSvømmer(konkurrenceSvømmerListe);
     }
 
-    /*
-    public void visJuniorHold(){
-       ArrayList<KonkurrenceSvømmer> juniourHold = enTræner.skafJuniorHold();
-       ui.printJuniorHold(juniourHold);
-    }
-    public void visSeniorHold(){
-        ArrayList<KonkurrenceSvømmer> seniorHold = enTræner.skafSeniorHold();
-        ui.printSeniorHold(seniorHold);
-    }
-    public void visCrawlOpdeling(){
-        ArrayList<KonkurrenceSvømmer> crawlOpdeling = enTræner.crawlOpdeling(konkurrenceSvømmere);
-        ui.printCrawlOpdeling(crawlOpdeling);
-    }
-    public void visRygCrawlOpdeling(){
-        ArrayList<KonkurrenceSvømmer> rygCrawlOpdeling = enTræner.rygCrawlOpdeling(konkurrenceSvømmere);
-        ui.printRygCrawlOpdeling(rygCrawlOpdeling);
-    }
-    public void visBrystSvømningOpdeling(){
-        ArrayList<KonkurrenceSvømmer> brystSvømningOpdeling = enTræner.brystSvømningOpdeling(konkurrenceSvømmere);
-        ui.printBrystSwømningOpdeling(brystSvømningOpdeling);
-    }
-    public void visButterflyOpdeling(){
-        ArrayList<KonkurrenceSvømmer> butterFlyOpdeling = enTræner.butterflyOpdeling(konkurrenceSvømmere);
-        ui.printBytterflyOpdeling(butterFlyOpdeling);
-    }
-    public void visTop5KonkurrenceSvømmerer(){
-        ArrayList<KonkurrenceSvømmer> top5 = enTræner.top5KonkurrenceSvømmerer(konkurrenceSvømmere);
-        ui.printTop5(top5);
-    }
-
-     */
 }

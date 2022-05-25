@@ -1,5 +1,6 @@
 package view;
 
+import enums.Disciplin;
 import model.KonkurrenceSvømmer;
 import model.Medlem;
 
@@ -49,6 +50,11 @@ public class UI {
         }
 
     //General UI
+
+    public void detVarEnSuccess(String hvilkenSuccess) {
+        System.out.println("\nDet var en success at " + hvilkenSuccess + ".\n");
+    }
+
     public void inputIsInvalid(int helTal){
         System.out.println("dit input '" + helTal + "' er invalid.");
     }
@@ -83,6 +89,23 @@ public class UI {
                         System.out.println("Du indtastede ikke et ja eller nej");
                 }
             }
+    }
+
+    public boolean askUserActiveOrInactive(){
+        while(true) {
+            System.out.print("Indtast 'aktiv' eller 'inaktiv' ");
+            String userAnswer = getStringInput().toLowerCase(Locale.ROOT);
+            switch (userAnswer){
+                case "aktiv", "ak":
+                    return true;
+
+                case "inaktiv", "in":
+                    return false;
+
+                default:
+                    System.out.println("Du indtastede ikke et 'aktiv' eller 'inaktiv'.");
+            }
+        }
     }
 
     public void typeHere(){
@@ -229,20 +252,52 @@ public class UI {
 
 
 
+    public void erSvømmerTilkyttetEnKonkurrence() {
+        System.out.println("Har konkurrencesvømmeren en konkurrence de er tilknyttet til?");
+    }
+
+    public void indtastStævneNavn() {
+        System.out.println("Indtast navnet på stævnet:");
+    }
+
+    public void indtastPlacering() {
+        System.out.println("Indtast svømmerens placering i stævnet:");
+    }
+
+    public void indtastTidenForStævnet() {
+        System.out.println("Indtast svømmerens tid i stævnet:");
+    }
+
     public void printTop5Listen(ArrayList<KonkurrenceSvømmer> konkurrenceSvømmererSorteretEfterDisciplin, String hold, String disciplin) {
-        System.out.println("TOP 5 LISTEN - " + hold.toUpperCase() + " - " + disciplin.toUpperCase() + '\n');
-        for (int i = 0; i < 4; i++) {
-            System.out.println(konkurrenceSvømmererSorteretEfterDisciplin.get(i));
-        }
-        System.out.println();
+            int num = konkurrenceSvømmererSorteretEfterDisciplin.size();
+            if (num >= 5) {
+                num = 4;
+            }
+            if (num == 0) {
+                System.out.println("Der er ingen på: " + hold.toUpperCase() + " indenfor disciplinen: " + disciplin.toUpperCase());
+            } else {
+                System.out.println("TOP 5 LISTEN - " + hold.toUpperCase() + " - " + disciplin.toUpperCase() + '\n');
+                for (int i = 0; i < num; i++) {
+                    KonkurrenceSvømmer enSvømmer = konkurrenceSvømmererSorteretEfterDisciplin.get(i);
+                    int medlemsnummer = enSvømmer.getMedlemsnummer();
+                    String navn = enSvømmer.getNavn();
+                    int fødselsdato = enSvømmer.udregnAlder();
+                    String aktivitet = enSvømmer.getErAktivSomTekst();
+                    int trænerID = enSvømmer.getTrænerID();
+                    String svømmedisciplin = enSvømmer.getSvømmedisciplin(Disciplin.valueOf(disciplin.toUpperCase())).printSvømmedisciplinTilKonkurrenceSvømmer();
+                    System.out.println("Medlems Nr. " + medlemsnummer + " " + navn + " " + fødselsdato + " år " + aktivitet + ", "
+                        + "TrænerID: " + trænerID + " | "
+                        + svømmedisciplin + " | ");
+                }
+                System.out.println('\n');
+            }
+
     }
 
 
+
+
     public void printKonkurrenceSvømmer(ArrayList<KonkurrenceSvømmer> konkurrenceSvømmerListe) {
-        String datoForBedsteTid = "";
-        String datoForBedsteTidBryst = "";
-        String datoForBedsteTidButterfly = "";
-        String datoForBedsteTidCrawl = "" ;
 
         System.out.println("KONKURRENCESVØMMERLISTE:\n");
         for (KonkurrenceSvømmer enKonkurrenceSvømmer: konkurrenceSvømmerListe) {
@@ -257,7 +312,7 @@ public class UI {
             String rygcrawl = enKonkurrenceSvømmer.getRygcrawl().printSvømmedisciplinTilKonkurrenceSvømmer();
             String brystsvømning = enKonkurrenceSvømmer.getBrystsvømning().printSvømmedisciplinTilKonkurrenceSvømmer();
 
-            System.out.println("Nr. " + medlemsnummer + " " + navn + " " + fødselsdato + " " + aktivitet + ", "
+            System.out.println("Medlems Nr. " + medlemsnummer + " " + navn + " " + fødselsdato + " " + aktivitet + ", "
                     + "TrænerID: " + trænerID + " | "
                     + butterfly + " | "
                     + crawl + " | "

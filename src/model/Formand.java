@@ -37,6 +37,11 @@ public class Formand extends Ansat{
     addKonkurrencesvømmer(enKonkurrencesvømmer);
   }
 
+  public void indmeldKonkurrencesvømmer(Medlem etMedlem, int trænerID, Svømmedisciplin butterfly, Svømmedisciplin crawl, Svømmedisciplin rygcrawl, Svømmedisciplin brystsvømning, Konkurrence enKonkurrence) {
+    KonkurrenceSvømmer enKonkurrencesvømmer = new KonkurrenceSvømmer(etMedlem, trænerID, butterfly, crawl, rygcrawl, brystsvømning, enKonkurrence);
+    addKonkurrencesvømmer(enKonkurrencesvømmer);
+  }
+
   public boolean opgraderTilKonkurrencesvømmer(int medlemsnummer, int trænerID, Svømmedisciplin butterfly, Svømmedisciplin crawl, Svømmedisciplin rygcrawl, Svømmedisciplin brystsvømning) {
     ArrayList<Medlem> medlemsListe = getMedlemsListen();
     for (Medlem etMedlem : medlemsListe) {
