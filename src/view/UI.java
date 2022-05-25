@@ -239,23 +239,30 @@ public class UI {
 
 
     public void printKonkurrenceSvømmer(ArrayList<KonkurrenceSvømmer> konkurrenceSvømmerListe) {
+        String datoForBedsteTid = "";
+        String datoForBedsteTidBryst = "";
+        String datoForBedsteTidButterfly = "";
+        String datoForBedsteTidCrawl = "" ;
+
         System.out.println("KONKURRENCESVØMMERLISTE:\n");
         for (KonkurrenceSvømmer enKonkurrenceSvømmer: konkurrenceSvømmerListe) {
             int medlemsnummer = enKonkurrenceSvømmer.getMedlemsnummer();
             String navn = enKonkurrenceSvømmer.getNavn();
             String fødselsdato = enKonkurrenceSvømmer.getFødselsdatoSomTekst();
             String aktivitet = enKonkurrenceSvømmer.getErAktivSomTekst();
-            double kontingentBalance = enKonkurrenceSvømmer.getKontingentBalance();
-            
             int trænerID = enKonkurrenceSvømmer.getTrænerID();
-            String disciplinAktiv = enKonkurrenceSvømmer.getRygcrawl().getErAktivSomTekst();
-            String disciplin = String.valueOf(enKonkurrenceSvømmer.getRygcrawl().getDisciplin());
-            double bedsteTræningsTid = enKonkurrenceSvømmer.getRygcrawl().getBedsteTræningsTidISek();
-            String datoForBedsteTid = enKonkurrenceSvømmer.getRygcrawl().getDatoForBedsteTidFormateret();
-            
-            
-            System.out.println("Nr. " + medlemsnummer + " " + navn + " " + fødselsdato + " " + aktivitet + ", balance: " + kontingentBalance + " kr." 
-                    + " " + trænerID + " " + disciplinAktiv + " " + disciplin + " " + bedsteTræningsTid + " " + datoForBedsteTid);
+
+            String butterfly = enKonkurrenceSvømmer.getButterfly().printSvømmedisciplinTilKonkurrenceSvømmer();
+            String crawl = enKonkurrenceSvømmer.getCrawl().printSvømmedisciplinTilKonkurrenceSvømmer();
+            String rygcrawl = enKonkurrenceSvømmer.getRygcrawl().printSvømmedisciplinTilKonkurrenceSvømmer();
+            String brystsvømning = enKonkurrenceSvømmer.getBrystsvømning().printSvømmedisciplinTilKonkurrenceSvømmer();
+
+            System.out.println("Nr. " + medlemsnummer + " " + navn + " " + fødselsdato + " " + aktivitet + ", "
+                    + "TrænerID: " + trænerID + " | "
+                    + butterfly + " | "
+                    + crawl + " | "
+                    + rygcrawl + " | "
+                    + brystsvømning);
         }
         System.out.println('\n');
     }

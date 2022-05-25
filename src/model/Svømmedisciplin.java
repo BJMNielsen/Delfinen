@@ -50,6 +50,26 @@ public class Svømmedisciplin {
     return datoForBedsteTid.format(danishDateFormat);
   }
 
+  public String printSvømmedisciplinTilKonkurrenceSvømmer(){
+    String disciplin = String.valueOf(getDisciplin());
+    String erAktiv = getErAktivSomTekst();
+    String bedsteTidEtEllerAndet;
+    String datoForBedsteTid;
+    if(getBedsteTræningsTidISek() > 0){
+      bedsteTidEtEllerAndet = "Bedste tid: " + getBedsteTræningsTidISek() + " sek,";
+      datoForBedsteTid = "Dato: " + getDatoForBedsteTidFormateret();
+    } else {
+      bedsteTidEtEllerAndet = "Ingen Bedste tid,";
+      datoForBedsteTid = "Ingen dato.";
+    }
+    return disciplin + ": " + erAktiv + ", " + bedsteTidEtEllerAndet + " " + datoForBedsteTid;
+  }
+
+
+
+
+
+
   @Override
   public String toString() {
     String bedsteTidDato;
